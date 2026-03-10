@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Mobe_2 : Enemy_AI
 {
-    private Transform player_pos; // Ссылка на игрока
-    private Vector3 startingPosition; // Начальная позиция врага
+    private Transform player_pos; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    private Vector3 startingPosition; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private Animator animator;
     private float moveSpeed = 2f;
     public float health_mobe;
@@ -40,12 +40,12 @@ public class Mobe_2 : Enemy_AI
     void Update()
     {
         Move();
-        rb_2.velocity = direction * moveSpeed;
+        rb_2.linearVelocity = direction * moveSpeed;
         IsAttacking_m = false;
         IsWalking_m = true;
         if (Player.Instance.IsAttacking_() == true)
         {
-            rb_2.velocity = Vector3.zero;
+            rb_2.linearVelocity = Vector3.zero;
             IsAttacking_m = true;
             IsWalking_m = false;
         }
@@ -62,5 +62,5 @@ public class Mobe_2 : Enemy_AI
             isDie_m = false;
         }
     }
-    //прописать код для смены анимации
+    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 }

@@ -42,7 +42,7 @@ public class Turret : MonoBehaviour
     private void ActivationAttack()
     {
         GameObject obj = Instantiate(prefBullet, transform.position, Quaternion.identity);
-        obj.GetComponent<Rigidbody2D>().velocity = attack_dir * attackSpeed;
+        obj.GetComponent<Rigidbody2D>().linearVelocity = attack_dir * attackSpeed;
         //obj.GetComponent<Tranform>().Translate(attack_dir * attackSpeed);
         Destroy(obj, 3f);
         Destroy(gameObject, 3f);

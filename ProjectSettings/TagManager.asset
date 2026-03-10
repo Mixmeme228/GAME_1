@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Player_1
   - Enemy
@@ -20,17 +20,19 @@ TagManager:
   - GunPlayer
   - GrenadaBoss
   - GrenadaPlayer
+  - EnvironmentTrigger
+  - Wall
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - IgnoreEnemy
   - IgnorePlayer
   - Obstacle
-  - 
+  - Projectile
   - 
   - 
   - 
@@ -57,3 +59,5 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  m_RenderingLayers:
+  - Default
