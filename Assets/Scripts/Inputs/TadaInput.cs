@@ -1,26 +1,20 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// This class have public static input variables and methods that can be easily accessed by any other class.
-/// </summary>
+
 public class TadaInput : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
+    
+    
 
     [TextArea(2, 10)]
     public string notes = "This class have public static input variables and methods that can be easily accessed by any other class.";
 
     private readonly static bool debug = false;
 
-    #region ------------------------------------------ PROPERTIES
+   
 
-    #region ------------------------------------------ MOUSE PROPERTIES
+   
 
     public static bool IsMouseActive { get { return _isMouseActive; } private set { _isMouseActive = value; } }
     private static bool _isMouseActive;
@@ -43,13 +37,9 @@ public class TadaInput : MonoBehaviour
     public static Vector3 MouseWorldPos { get { return _MouseWorldPos; } private set { _MouseWorldPos = value; } }
     private static Vector3 _MouseWorldPos;
 
-    #endregion
+   
 
-    #region ------------------------------------------ KEYBOARD AND JOYSTICK PROPERTIES
-
-    /// <summary>
-    /// These keys map to one or several KeyCodes from Unity's Input System and also map joystick axes as Keys.
-    /// </summary>
+    
     public enum ThisKey
     { 
         None, MoveLeft, MoveRight, MoveUp, MoveDown, PrimaryAction, SecondaryAction,
@@ -88,11 +78,11 @@ public class TadaInput : MonoBehaviour
     // To stop the mouse scrollwheel from infinitely registering KeyUp.
     private bool isScrollWheelActive;
 
-    #endregion
+   
 
     private Camera cam;
 
-    #endregion
+    
 
     private void Awake()
     {
@@ -102,7 +92,7 @@ public class TadaInput : MonoBehaviour
 
     private void Update()
     {
-        #region ------------------------------------------ STORE MOUSE PROPERTIES
+        
 
         if (_MouseInput.sqrMagnitude > 0)
             if (!_isMouseActive)
@@ -121,9 +111,9 @@ public class TadaInput : MonoBehaviour
         _MouseWorldPos = cam.ScreenToWorldPoint(_MousePixelPos);
         _MouseWorldPos.z = 0f;
 
-        #endregion
+      
 
-        #region ------------------------------------------ KEYBOARD AND JOYSTICK INPUTS
+      
 
         _MoveAxisSmoothInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
@@ -138,14 +128,10 @@ public class TadaInput : MonoBehaviour
         if (_MoveAxisRawInput.magnitude > 1)
             _MoveAxisRawInput *= (100f / _MoveAxisRawInput.magnitude) / 100f;
 
-        #region ------------------------------------------ CUSTOM INPUTS ADDED TO UNITY'S INPUT MANAGER
-
-        // To support all controllers, use these names and add new inputs to Unity's Input Manager.
-        // At the moment it only support Xbox controllers
+        
         _AimAxisSmoothInput = new Vector2(Input.GetAxis("HorizontalAim"), Input.GetAxis("VerticalAim"));
 
-        // Clamp axis magnitude to have a value that doesn't go higher than 1 if it's a diagonal vector.
-        if (_AimAxisSmoothInput.magnitude > 1)
+        
             _AimAxisSmoothInput *= (100f / _AimAxisSmoothInput.magnitude) / 100f;
 
         _AimAxisRawInput = new Vector2(Input.GetAxisRaw("HorizontalAim"), Input.GetAxisRaw("VerticalAim"));
@@ -154,17 +140,17 @@ public class TadaInput : MonoBehaviour
         if (_AimAxisRawInput.magnitude > 1)
             _AimAxisRawInput *= (100f / _AimAxisRawInput.magnitude) / 100f;
 
-        #region ------------------------------------------ STORE CURRENT AXIS AS KEYS
+        
 
-        // Xbox 360 Inputs. I'm not exactly sure, but I think this works for Xbox One controllers too.
+       
         StoreCurrentAxisAsKeyType(ThisKey.Xbox360RightTrigger, Input.GetAxis("Xbox360RightTrigger"));
         StoreCurrentAxisAsKeyType(ThisKey.Xbox360LeftTrigger, Input.GetAxis("Xbox360LeftTrigger"));
 
-        #endregion
+       
 
-        #endregion
+       
 
-        #region ------------------------------------------ STORE CURRENT KEY
+       
 
         if (Input.GetKey(KeyCode.A))
             StoreCurrentKey(ThisKey.MoveLeft);
@@ -184,9 +170,9 @@ public class TadaInput : MonoBehaviour
         if (Input.GetMouseButton(1) || GetKey(ThisKey.Xbox360LeftTrigger))
             StoreCurrentKey(ThisKey.SecondaryAction);
 
-        #endregion
+      
 
-        #region ------------------------------------------ STORE CURRENT KEY DOWN
+       
 
         if (Input.GetKeyDown(KeyCode.A))
             StoreCurrentKeyDown(ThisKey.MoveLeft);
@@ -236,9 +222,8 @@ public class TadaInput : MonoBehaviour
             StoreCurrentKeyDown(ThisKey.PreviousWeapon);
         }
 
-        #endregion
+       
 
-        #region ------------------------------------------ STORE CURRENT KEY UP
 
         if (Input.GetKeyUp(KeyCode.A))
             StoreCurrentKeyUp(ThisKey.MoveLeft);
@@ -287,9 +272,9 @@ public class TadaInput : MonoBehaviour
             isScrollWheelActive = false;
         }
 
-        #endregion
+      
 
-        #endregion
+        
     }
 
     /// <summary>

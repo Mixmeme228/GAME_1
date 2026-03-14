@@ -7,13 +7,13 @@
 [RequireComponent(typeof(AudioSource))]
 public class SoundEmitter : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     public AudioSource Source { get { return _Source; } private set { _Source = value; } }
     protected AudioSource _Source;

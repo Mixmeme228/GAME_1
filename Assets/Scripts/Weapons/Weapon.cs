@@ -7,13 +7,13 @@
 
 public class Weapon : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     #region ---------------------------- PROPERTIES
 

@@ -2,21 +2,12 @@
 
 public class AfterImageGenerator : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
+    
+    
 
     [TextArea(10, 13)]
-    public string notes = "The gameobject with this class attached, and that has a Sprite Renderer, " +
-        "will create a new gameobject with an AfterImageGroup class attached to it and a hardcoded " +
-        "amount of AfterImage classes stored in the group. When the ground is created, it will immediately " +
-        "look for the class AfterImageHandler and add itself to a List. This list is then used by that class to " +
-        "set Active all the AfterImages stored in each group. I made it like this to avoid the hassle of " +
-        "manually creating a bunch of after images and the pain it could be to change them all if I ever needed to.";
+    
 
     public GameObject afterImagePrefab;
 

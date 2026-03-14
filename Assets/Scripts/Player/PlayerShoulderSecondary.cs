@@ -1,26 +1,10 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// This class uses the Crosshair AimDirection and other properties like rate, min offset angle and
-/// max offset angle to determine an offset angle that will be added to the secondary shoulder as an extra rotation. 
-/// This is an important part of the behaviour that controls the rotation of the shoulders, with the correct 
-/// values both shoulders match their rotation in relation to the weapon that's being held by the character.
-/// </summary>
+
 public class PlayerShoulderSecondary : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
-
-    [TextArea(4, 10)]
-    public string notes = "This class uses the Crosshair AimDirection and other properties like rate, min offset angle and " +
-        "max offset angle to determine an offset angle that will be added to the secondary shoulder as an extra rotation. " +
-        "This is an important part of the behaviour that controls the rotation of the shoulders, with the correct values " +
-        "both shoulders match their rotation in relation to the weapon that's being held by the character.";
+    
+    
 
     [SerializeField] private float rate = 60f;
     [SerializeField] private float minOffsetAngle = 0f;

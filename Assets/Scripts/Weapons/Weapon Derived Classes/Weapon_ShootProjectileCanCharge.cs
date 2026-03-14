@@ -1,24 +1,12 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// This class has a primary action to shoot projectiles based on a UseRate value
-/// and a secondary action with a timer that after reaching its duration will shoot a
-/// secondary projectile.
-/// </summary>
+
 
 public class Weapon_ShootProjectileCanCharge : Weapon
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
 
-    [TextArea(5, 10)]
-    public string notes = "This is a derived class from the base class Weapon. It has a primary action to shoot projectiles " +
-        "based on a UseRate value and a secondary action with a timer that after reaching its duration will shoot a secondary projectile.";
+
+   
 
     public GameObject basicProjectilePrefab;
     public GameObject chargedProjectilePrefab;
@@ -38,7 +26,7 @@ public class Weapon_ShootProjectileCanCharge : Weapon
     protected override void Awake()
     {
         base.Awake();
-        useRateValues = new float[] { 0.125f, 0.05f };
+        useRateValues = new float[] { 1.125f, 0.05f };
         TryGetComponent(out anim);
     }
 

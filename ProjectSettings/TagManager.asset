@@ -22,19 +22,22 @@ TagManager:
   - GrenadaPlayer
   - EnvironmentTrigger
   - Wall
+  - BossProjectile
+  - Obstacle
+  - Player_Projectile
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - Enemy
   - Water
   - UI
   - IgnoreEnemy
   - IgnorePlayer
   - Obstacle
+  - Player
   - Projectile
-  - 
-  - 
+  - Enemy_Projectile
   - 
   - 
   - 
@@ -56,8 +59,16 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Player_Help
+    uniqueID: 3812060437
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 264992037
+    locked: 0
   m_RenderingLayers:
   - Default
+  - Player
+  - Ground

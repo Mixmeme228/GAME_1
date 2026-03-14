@@ -190,11 +190,11 @@ public class Robot_1 : Enemy_AI
             {
                 if (hit.collider.tag == "Player_1")
                 {
-                    Player player_1 = hit.collider.GetComponent<Player>();
+                    //Player player_1 = hit.collider.GetComponent<Player>();
                     Debug.Log("Attack! Damage: " + attackDamage);
                     Debug.Log("Attack! Damage: " + hit.collider.tag);
-                    player_1.TakeDamage_hero(attackDamage);
-                    player_1.TakeHP_hero();
+                    //player_1.TakeDamage_hero(attackDamage);
+                    //player_1.TakeHP_hero();
                     bul_robot = Instantiate(pref_2, shootpoint.position, Quaternion.identity);
                     if (bul_robot != null)
                     {

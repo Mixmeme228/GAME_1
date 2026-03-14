@@ -6,12 +6,12 @@
 /// </summary>
 public class AnimationHandler : MonoBehaviour
 {
-    // --------------------------------------
+    
     // - 2D TopDown Isometric Shooter Study -
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     [SerializeField] private bool getAnimInChild = false;
     protected Animation anim;

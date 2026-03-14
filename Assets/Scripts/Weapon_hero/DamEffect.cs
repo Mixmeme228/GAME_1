@@ -12,7 +12,7 @@ public class DamEffect : MonoBehaviour
     }
     private void Update()
     {
-        anim.SetBool(_go, Gun.Instance.IsCollider());
+        //anim.SetBool(_go, Gun.Instance.IsCollider());
     }
 }
 

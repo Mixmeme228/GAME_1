@@ -43,12 +43,12 @@ public class Mobe_2 : Enemy_AI
         rb_2.linearVelocity = direction * moveSpeed;
         IsAttacking_m = false;
         IsWalking_m = true;
-        if (Player.Instance.IsAttacking_() == true)
-        {
-            rb_2.linearVelocity = Vector3.zero;
-            IsAttacking_m = true;
-            IsWalking_m = false;
-        }
+        //if (Player.Instance.IsAttacking_() == true)
+        //{
+        //    rb_2.linearVelocity = Vector3.zero;
+        //    IsAttacking_m = true;
+        //    IsWalking_m = false;
+        //}
         Get_Health();
     }
     void Get_Health()

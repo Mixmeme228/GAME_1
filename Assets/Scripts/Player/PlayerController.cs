@@ -6,28 +6,22 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class PlayerController : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
+   
 
     [TextArea(2, 10)]
-    public string notes = "It receives inputs from TadaInput and calls methods from other classes based on those inputs. It " +
-        "also handles movement.";
+    
 
-    #region ---------------------------- PROPERTIES
+  
 
     private PlayerPhysics _PlayerPhysics;
     private PlayerSkills _PlayerSkills;
     private PlayerAnimations _PlayerAnimations;
     private WeaponHandler _WeaponHandler;
 
-    #endregion
+   
 
-    #region ---------------------------- UNITY CALLBACKS
+   
 
     // Ignore never invoked message, it's 
     private void Awake()
@@ -113,13 +107,11 @@ public class PlayerController : MonoBehaviour
         #endregion
     }
 
-    #endregion
+    
 
-    #region ---------------------------- METHODS
+    
 
-    /// <summary>
-    /// All the actions that should be done on <see cref="Awake"/>
-    /// </summary>
+    
     private void Initialize()
     {
         TryGetComponent(out _PlayerAnimations);
@@ -128,10 +120,7 @@ public class PlayerController : MonoBehaviour
         TryGetComponent(out _PlayerSkills);
     }
 
-    /// <summary>
-    /// To display a warning message in the console if there is something missing 
-    /// that should be added in the Inspector.
-    /// </summary>
+    
     private void CheckIfMissingClasses()
     {
         if (_PlayerAnimations == null || _WeaponHandler == null || _PlayerPhysics == null || _PlayerSkills == null)
@@ -141,5 +130,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    #endregion
+  
 }

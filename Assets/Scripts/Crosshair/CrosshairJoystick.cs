@@ -7,13 +7,13 @@
 /// </summary>
 public class CrosshairJoystick : Crosshair
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     [TextArea(3, 10)]
     public string notes = "This class derives from the base class Crosshair. It overrides the method UpdateCrosshair " +

@@ -6,17 +6,7 @@
 /// </summary>
 public class SoundHandlerLocal : SoundEmitter
 {
-    // --------------------------------------
-    // - 2D TopDown Isometric Shooter Study -
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
-
-    [TextArea(6, 11)]
-    public string notes = "Any gameobject with this class will have an AudioSource and will be able to easily play sounds on start() " +
-        "or link to other classes to quickly play sounds using the provided public variables. Make sure to disable AudioSource Play " +
-        "On Awake.";
+   
 
     public Sound[] sounds;
 

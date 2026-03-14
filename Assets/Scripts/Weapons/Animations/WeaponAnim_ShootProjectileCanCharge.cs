@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 public class WeaponAnim_ShootProjectileCanCharge : AnimationHandler
 {
-    [TextArea(2, 10)]
-    public string notes = "This class has methods to handle the animations of the derived class W_ShootProjectileCanCharge.";
+   
 
     public enum Animation { Idle, BasicShot, Charging, ChargedShot }
 

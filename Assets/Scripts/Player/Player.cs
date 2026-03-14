@@ -1,474 +1,237 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Net;
-using Unity.VisualScripting;
-using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
-public class Player : MonoBehaviour
+/// <summary>
+/// Обычный зомби — патрулирует, преследует игрока, атакует.
+/// Параметры аниматора: Up_w, Down_w, Left_w, Right_w, Idle_zom,
+///                      Up_a, Down_a, Left_a, Right_a, Death_2
+/// </summary>
+[RequireComponent(typeof(Rigidbody2D))]
+public class Zombie : MonoBehaviour
 {
-    public static Player Instance { get; private set; }
+    [Header("Характеристики")]
+    public float moveSpeed = 2f;
+    public float chaseRange = 5f;   // дистанция обнаружения игрока
+    public float attackRange = 0.8f; // дистанция атаки
+    public float attackCooldown = 1.2f;
+    public int attackDamage = 1;
+    public int maxHealth = 3;
 
-    private Rigidbody2D rb;
-    private Vector2 inputVector;
+    [Header("Патруль")]
+    public Transform[] patrolPoints;
+    public float patrolWaitTime = 1.5f;
 
-    private float lastAttackTime_1;
-    private float attackCooldown_1 = 1f;
+    [Header("Ссылки")]
+    [SerializeField] private string playerTag = "Player";
 
-    [SerializeField] private float speed_player = 3f;
-    public float health_hero = 100f;
-    private Vector2 speed_to_axis;
-    private bool togetherY;
-    private bool togetherX;
-    private bool isRunningUp;
-    private bool isRunningDown;
-    private bool isRunningLeftRight;
-    private bool rev;
-    private bool isAttacking_ = false;
-    private bool isAttackingUp;
-    private bool isAttackingDown;
-    private bool isAttackingLeft;
-    private bool isAttackingRight;
-    private bool isUpDown;
-    private bool isStandingUp;
-    private bool isStandingDown;
-    private bool isStandingRight;
-    private bool isStandingLeft;
-    public bool isShooting_1 = false;
-    public bool isShooting_2 = false;
-    private bool isShootingUp;
-    private bool isShootingDown;
-    private bool isShootingLeft;
-    private bool isShootingRight;
-    private bool isDropingGrenadaUp;
-    private bool isDropingGrenadaDown;
-    private bool isDropingGrenadaLeft;
-    private bool isDropingGrenadaRight;
+    // ── Приватные ─────────────────────────────────────────────
+    private Rigidbody2D _rb;
+    private Animator _anim;
+    private Transform _player;
 
-    public GameObject _gun;
-    public GameObject _grenada;
+    private int _health;
+    private bool _isDead = false;
+    private float _attackTimer = 0f;
 
-    public event EventHandler TakeHP;
-    public event EventHandler TakeCount;
-    public event EventHandler TakeMed;
-    public byte count_Key = 0;
-    public byte count_Gre = 0;
+    private int _patrolIndex = 0;
+    private float _patrolTimer = 0f;
+    private bool _waitingAtPoint = false;
 
-    public bool IsAttacking_()
+    private Vector2 _moveDir = Vector2.zero;
+
+    // Аниматор — названия параметров
+    private static readonly int P_Up_w = Animator.StringToHash("Up_w");
+    private static readonly int P_Down_w = Animator.StringToHash("Down_w");
+    private static readonly int P_Left_w = Animator.StringToHash("Left_w");
+    private static readonly int P_Right_w = Animator.StringToHash("Right_w");
+    private static readonly int P_Idle = Animator.StringToHash("Idle_zom");
+    private static readonly int P_Up_a = Animator.StringToHash("Up_a");
+    private static readonly int P_Down_a = Animator.StringToHash("Down_a");
+    private static readonly int P_Left_a = Animator.StringToHash("Left_a");
+    private static readonly int P_Right_a = Animator.StringToHash("Right_a");
+    private static readonly int P_Death = Animator.StringToHash("Death_2");
+
+    // =========================================================================
+    void Awake()
     {
-        return isAttacking_;
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+        _health = maxHealth;
+
+        var p = GameObject.FindGameObjectWithTag(playerTag);
+        if (p) _player = p.transform;
     }
-    public bool IsRunningUp()
+
+    void Update()
     {
-        return isRunningUp;
-    }
-    public bool IsRunningDown()
-    {
-        return isRunningDown;
-    }
-    public bool IsRunningLeftRight()
-    {
-        return isRunningLeftRight;
-    }
-    public bool Rev()
-    {
-        return rev;
-    }
-    public bool IsAttackingUp()
-    {
-        return isAttackingUp;
-    }
-    public bool IsAttackingDown()
-    {
-        return isAttackingDown;
-    }
-    public bool IsAttackingRight()
-    {
-        return isAttackingRight;
-    }
-    public bool IsAttackingLeft()
-    {
-        return isAttackingLeft;
-    }
-    public bool IsDropingGrenadaUp()
-    {
-        return isDropingGrenadaUp;
-    }
-    public bool IsDropingGrenadaDown()
-    {
-        return isDropingGrenadaDown;
-    }
-    public bool IsDropingGrenadaRight()
-    {
-        return isDropingGrenadaRight;
-    }
-    public bool IsDropingGrenadaLeft()
-    {
-        return isDropingGrenadaLeft;
-    }
-    public bool IsStandingUp()
-    {
-        return isStandingUp;
-    }
-    public bool IsStandingDown()
-    {
-        return isStandingDown;
-    }
-    public bool IsStandingRight()
-    {
-        return isStandingRight;
-    }
-    public bool IsStandingLeft()
-    {
-        return isStandingLeft;
-    }
-    public bool IsShootingUp()
-    {
-        return isShootingUp;
-    }
-    public bool IsShootingDown()
-    {
-        return isShootingDown;
-    }
-    public bool IsShootingRight()
-    {
-        return isShootingRight;
-    }
-    public bool IsShootingLeft()
-    {
-        return isShootingLeft;
-    }
-    public bool NowIsShooting_1()
-    {
-        return isShooting_1;
-    }
-    public bool NowIsShooting_2()
-    {
-        return isShooting_2;
-    }
-    public bool ReturnToIdle()
-    {
-        return !isShooting_1;
-    }
-    private void HandleMovement()
-    {
-        inputVector = inputVector.normalized;
-        speed_to_axis = inputVector * (speed_player * Time.fixedDeltaTime);
-        rb.MovePosition(rb.position + speed_to_axis);
-    }
-    private void Awake()
-    {
-        Instance = this;
-        rb = GetComponent<Rigidbody2D>();
-    }
-    private void Start()
-    {
-        _gun.SetActive(false);
-        if (_grenada != null)
+        if (_isDead) return;
+
+        _attackTimer -= Time.deltaTime;
+
+        float distToPlayer = _player ? Vector2.Distance(transform.position, _player.position) : Mathf.Infinity;
+
+        if (distToPlayer <= attackRange)
         {
-            _grenada.SetActive(false);
+            // Атака
+            _moveDir = Vector2.zero;
+            TryAttack();
         }
-    }
-    private void FixedUpdate()
-    {
-        HandleMovement();
-        moving_mode();
-    }
-    private void Update()
-    {
-        inputVector = Vector2.zero;
-
-        if (Input.GetKey(KeyCode.W))
+        else if (distToPlayer <= chaseRange)
         {
-            inputVector.y = 1f;
+            // Преследование
+            _moveDir = (_player.position - transform.position).normalized;
+        }
+        else
+        {
+            // Патруль
+            Patrol();
         }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            inputVector.y = -1f;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            inputVector.x = -1f;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            inputVector.x = 1f;
-        }
-        Animation();
+        UpdateAnimation();
     }
-    public void moving_mode()
+
+    void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (_isDead) return;
+        _rb.linearVelocity = _moveDir * moveSpeed;
+    }
+
+    // ── Патруль ───────────────────────────────────────────────
+    private void Patrol()
+    {
+        if (patrolPoints == null || patrolPoints.Length == 0)
         {
-            isShooting_1 = true;
-            _gun.SetActive(true);
-            isShooting_2 = false;
-            if (_grenada != null)
+            _moveDir = Vector2.zero;
+            return;
+        }
+
+        if (_waitingAtPoint)
+        {
+            _moveDir = Vector2.zero;
+            _patrolTimer -= Time.deltaTime;
+            if (_patrolTimer <= 0f)
             {
-                _grenada.SetActive(false);
+                _waitingAtPoint = false;
+                _patrolIndex = (_patrolIndex + 1) % patrolPoints.Length;
             }
+            return;
         }
-        if (Input.GetKey(KeyCode.Alpha1))
+
+        Transform target = patrolPoints[_patrolIndex];
+        Vector2 dir = (target.position - transform.position);
+        if (dir.magnitude < 0.15f)
         {
-            isShooting_1 = false;
-            _gun.SetActive(false);
-            isShooting_2 = false;
-            if (_grenada != null)
-            {
-                _grenada.SetActive(false);
-            }
+            _waitingAtPoint = true;
+            _patrolTimer = patrolWaitTime;
+            _moveDir = Vector2.zero;
         }
-        if (Input.GetKey(KeyCode.Alpha3))
+        else
         {
-            if (_grenada != null)
-            {
-                isShooting_2 = true;
-                _grenada.SetActive(true);
-            }
-            isShooting_1 = false;
-            _gun.SetActive(false);
+            _moveDir = dir.normalized;
         }
     }
-    private void Animation()
+
+    // ── Атака ────────────────────────────────────────────────
+    private void TryAttack()
     {
-        isUpDown = false;
+        if (_attackTimer > 0f) return;
+        _attackTimer = attackCooldown;
 
-        isRunningUp = false;
-        isRunningDown = false;
-        isRunningLeftRight = false;
-        rev = false;
-        togetherY = false;
-        togetherX = false;
-        
-        isAttackingUp = false;
-        isAttackingDown = false;
-        isAttackingLeft = false;
-        isAttackingRight = false;
+        // Направление на игрока для анимации атаки
+        if (_player)
+        {
+            Vector2 dir = (_player.position - transform.position).normalized;
+            PlayAttackAnim(dir);
 
-        isStandingUp = false;
-        isStandingDown = false;
-        isStandingRight = false;
-        isStandingLeft = false;
-
-        isShootingUp = false;
-        isShootingDown = false;
-        isShootingRight = false;
-        isShootingLeft = false;
-
-        isDropingGrenadaUp = false;
-        isDropingGrenadaDown = false;
-        isDropingGrenadaLeft = false;
-        isDropingGrenadaRight = false;
-
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.S))
-        {
-            togetherY = true;
-        }
-        if (Input.GetKey(KeyCode.W) && togetherY == false)
-        {
-            if (isShooting_1 == false && isShooting_2 == false)
-            {
-                isRunningUp = true;
-            }
-            else if (isShooting_1 == true)
-            {
-                isAttackingUp = true;
-                isShootingUp = true;
-            }
-            else if (isShooting_2 == true)
-            {
-                isDropingGrenadaUp = true;
-            }
-            isUpDown = true;
-        }
-        if (Input.GetKeyUp(KeyCode.W) && isShooting_1)
-        {
-            isStandingUp = true;
-            isShootingUp = true;
-        }     
-        if (Input.GetKey(KeyCode.S) && togetherY == false)
-        {
-            if (isShooting_1 == false && isShooting_2 == false)
-            {
-                isRunningDown = true;
-            }
-            else if (isShooting_1 == true)
-            {
-                isAttackingDown = true;
-                isShootingDown = true;
-            }
-            else if (isShooting_2 == true)
-            {
-                isDropingGrenadaDown = true;
-            }
-            isUpDown = true;
-        }
-        if (Input.GetKeyUp(KeyCode.S) && isShooting_1)
-        {
-            isStandingDown = true;
-            isShootingDown = true;
-        }
-
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
-        {
-            togetherX = true;
-        }
-        if (Input.GetKey(KeyCode.A) && togetherX == false)
-        {
-            if (isUpDown == false)
-            {
-                if (isShooting_1 == false && isShooting_2 == false)
-                {
-                    isRunningLeftRight = true;
-                    rev = true;
-                }
-                else if (isShooting_1 == true)
-                { 
-                    isAttackingLeft = true;
-                    isShootingLeft = true;
-                }
-                else if (isShooting_2 == true)
-                {
-                    isDropingGrenadaLeft = true;
-                }
-            } 
-        }
-        if (Input.GetKeyUp(KeyCode.A) && isShooting_1)
-        {
-            isStandingLeft = true;
-            isShootingLeft = true;
-        }
-
-        if (Input.GetKey(KeyCode.D) && togetherX == false)
-        {
-            if (isUpDown == false)
-            {
-                if (isShooting_1 == false && isShooting_2 == false)
-                {
-                    isRunningLeftRight = true;
-                    rev = false;
-                }
-                else if (isShooting_1 == true)
-                { 
-                    isAttackingRight = true;
-                    isShootingRight = true;
-                }
-                else if (isShooting_2 == true)
-                {
-                    isDropingGrenadaRight = true;
-                }
-            }
-        }
-        if (Input.GetKeyUp(KeyCode.D) && isShooting_1)
-        {
-            isStandingRight = true;
-            isShootingRight = true;
+            var playerHealth = _player.GetComponent<PlayerHealth>();
+            playerHealth?.TakeDamage(attackDamage);
         }
     }
-    public void TakeDamage_hero(float damage)
+
+    // ── Анимация движения ────────────────────────────────────
+    private void UpdateAnimation()
     {
-        health_hero -= damage; // ��������� ��������
-        Debug.Log("Player takes damage: " + damage + ". Current health: " + health_hero);
+        // Сбрасываем все
+        _anim.SetBool(P_Up_w, false);
+        _anim.SetBool(P_Down_w, false);
+        _anim.SetBool(P_Left_w, false);
+        _anim.SetBool(P_Right_w, false);
+        _anim.SetBool(P_Idle, false);
 
-        if (health_hero <= 0)
+        if (_moveDir == Vector2.zero)
         {
-            Die(); // �������� ����� ������, ���� �������� ���� ��� ����� ����
+            _anim.SetBool(P_Idle, true);
+            return;
+        }
+
+        // Определяем доминирующую ось
+        if (Mathf.Abs(_moveDir.x) >= Mathf.Abs(_moveDir.y))
+        {
+            if (_moveDir.x > 0) _anim.SetBool(P_Right_w, true);
+            else _anim.SetBool(P_Left_w, true);
+        }
+        else
+        {
+            if (_moveDir.y > 0) _anim.SetBool(P_Up_w, true);
+            else _anim.SetBool(P_Down_w, true);
         }
     }
-    public void TakeHP_hero()
+
+    // ── Анимация атаки ───────────────────────────────────────
+    private void PlayAttackAnim(Vector2 dir)
     {
-        TakeHP?.Invoke(this, EventArgs.Empty);
+        _anim.SetBool(P_Up_a, false);
+        _anim.SetBool(P_Down_a, false);
+        _anim.SetBool(P_Left_a, false);
+        _anim.SetBool(P_Right_a, false);
+
+        if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+        {
+            if (dir.x > 0) _anim.SetBool(P_Right_a, true);
+            else _anim.SetBool(P_Left_a, true);
+        }
+        else
+        {
+            if (dir.y > 0) _anim.SetBool(P_Up_a, true);
+            else _anim.SetBool(P_Down_a, true);
+        }
     }
-    public void TakeCountKey()
+
+    // ── Урон / смерть ────────────────────────────────────────
+    public void TakeDamage(int dmg)
     {
-        TakeCount?.Invoke(this, EventArgs.Empty);
+        if (_isDead) return;
+        _health -= dmg;
+        if (_health <= 0) Die();
     }
-    public void TakeMedicine()
-    {
-        TakeMed?.Invoke(this, EventArgs.Empty);
-    }
+
     private void Die()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(5);
-        //�������� �������� ��� ������ postprocessing
-        //Debug.Log("Player has died!");
-        // ������ ������ ������ (��������, ������������ �����, �������� � �.�.)
+        _isDead = true;
+        _rb.linearVelocity = Vector2.zero;
+
+        // Сбрасываем все параметры
+        _anim.SetBool(P_Up_w, false);
+        _anim.SetBool(P_Down_w, false);
+        _anim.SetBool(P_Left_w, false);
+        _anim.SetBool(P_Right_w, false);
+        _anim.SetBool(P_Idle, false);
+        _anim.SetBool(P_Up_a, false);
+        _anim.SetBool(P_Down_a, false);
+        _anim.SetBool(P_Left_a, false);
+        _anim.SetBool(P_Right_a, false);
+
+        _anim.SetTrigger(P_Death);
+
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject, 2f);
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    // ── Гизмо для отладки ────────────────────────────────────
+    void OnDrawGizmosSelected()
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            isAttacking_ = true;
-            if (Time.time >= lastAttackTime_1 + attackCooldown_1)
-            {
-                if ((collision.gameObject.tag == "Enemy") && (collision.gameObject.GetComponent<Zombie>() != null))
-                {
-                    Enemy_1 en = collision.gameObject.GetComponent<Enemy_1>();
-                    Zombie zom = collision.gameObject.GetComponent<Zombie>();
-                    if (en != null)
-                    {
-                        Debug.Log("Attack! Damage: " + zom.attackDamage);
-                        TakeDamage_hero(zom.attackDamage);
-                        TakeHP_hero();
-                    }
-                }
-                lastAttackTime_1 = Time.time;
-            }
-        }
-        if (collision.gameObject.tag == "Key")
-        {
-            count_Key = +1;
-            Destroy(collision.gameObject, 0.5f);
-            TakeCountKey();
-        }
-        if (collision.gameObject.tag == "Medicine")
-        {
-            health_hero = +5f;
-            Destroy(collision.gameObject, 0.5f);
-            TakeMedicine();
-        }
-        if (collision.gameObject.tag == "GrenadaPlayer")
-        {
-            count_Gre += 1;
-            if (count_Gre < 1)
-            {
-                collision.transform.SetParent(gameObject.transform);
-                collision.gameObject.transform.position = new Vector3(1, 1, 0);
-                _grenada = collision.gameObject;
-                _grenada.SetActive(false);
-            }
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            isAttacking_ = true;
-            if (Time.time >= lastAttackTime_1 + attackCooldown_1)
-            {
-                if ((collision.gameObject.tag == "Enemy") && (collision.gameObject.GetComponent<Zombie>() != null))
-                {
-                    Enemy_1 en = collision.gameObject.GetComponent<Enemy_1>();
-                    Zombie zom = collision.gameObject.GetComponent<Zombie>();
-                    if (en != null)
-                    {
-                        Debug.Log("Attack! Damage: " + zom.attackDamage);
-                        TakeDamage_hero(zom.attackDamage);
-                        TakeHP_hero();
-                    }
-                }
-                lastAttackTime_1 = Time.time;
-            }
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-            isAttacking_ = false;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 }

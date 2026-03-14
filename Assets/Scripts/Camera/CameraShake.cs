@@ -7,13 +7,13 @@
 /// </summary>
 public class CameraShake : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     // NOTE: Maybe I should remane this to something more generic as this could be used on any object, not just the camera.
 

@@ -5,13 +5,13 @@
 /// </summary>
 public class GUIHandler : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     [TextArea(1, 10)]
     public string notes = "Basic class to draw messages on the screen.";

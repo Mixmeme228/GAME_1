@@ -1,21 +1,13 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Controls the behaviour of the player's body based on MouseInput.vectorFromPlayerToMouseWorldPos.
-/// </summary>
+
 public class PlayerBodyPartsHandler : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
+    
+    
 
-    [TextArea(2, 10)]
-    public string notes = "This class controls the behaviour of the player's body based on MouseInput.VectorPlayerToMouseWPos " +
-        "and CrosshairJoystick.VectorPlayerToCrosshairWPos";
+   
 
     [Header("Body parts")]
     public SpriteRenderer[] handRenderers;

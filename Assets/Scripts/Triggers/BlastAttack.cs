@@ -80,7 +80,7 @@ public class BlastAttack : MonoBehaviour
             Instantiate(explosion, collision.transform.position, Quaternion.identity); //создаём объект для урона
             if (PlayerHere == true)
             {
-                Player.Instance.TakeDamage_hero(Boss1.Instance.attackDamage);
+                //Player.Instance.TakeDamage_hero(Boss1.Instance.attackDamage);
             }
         }
     }

@@ -5,13 +5,13 @@
 /// </summary>
 public class CrosshairHandler : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     [TextArea(3, 10)]
     public string notes = "This class has conditions to determine which of the crosshairs should be enabled and updating.";
@@ -55,15 +55,15 @@ public class CrosshairHandler : MonoBehaviour
 
     private void CheckIfReady()
     {
-        if (!isReady)
-        {
-            if (mouseCrosshair == null || joystickCrosshair == null)
-            {
-                Debug.LogError(gameObject.name + ": mouse or/and joystick crosshair missing!");
-                return;
-            }
+        //if (!isReady)
+        //{
+        //    if (mouseCrosshair == null || joystickCrosshair == null)
+        //    {
+        //        Debug.LogError(gameObject.name + ": mouse or/and joystick crosshair missing!");
+        //        return;
+        //    }
 
-            isReady = true;
-        }
+        //    isReady = true;
+        //}
     }
 }

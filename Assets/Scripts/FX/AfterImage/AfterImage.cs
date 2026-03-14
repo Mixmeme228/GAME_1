@@ -2,13 +2,13 @@
 
 public class AfterImage : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     private SpriteRenderer _SpriteRenderer;
     private Transform _Reference;

@@ -1,20 +1,12 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// To handle N amount of LookAt2Dv2 classes at the same time.
-/// </summary>
+
 public class LookAt2Dv2Handler : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+   
+    
 
-    [TextArea(1, 10)]
-    public string notes = "To handle N amount of LookAt2Dv2 classes at the same time.";
+    
 
     public LookAt2Dv2[] lookAts;
 

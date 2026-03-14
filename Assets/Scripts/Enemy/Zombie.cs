@@ -1,265 +1,355 @@
-using Pathfinding;
-using System.Collections;
-using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
-public class Zombie : Enemy_AI
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
+public class ZombieAI : MonoBehaviour
 {
-    public float moveSpeed = 2f; // �������� �������� �����
-    public float attackDamage = 10f; //���� �� �����
-    public float attackRange = 2.5f; // ��������� �����
-    public float attackCooldown = 1f; // ����� ����� �������
-    public float chaseDistance = 5f; // ���������� �������������
-    public float stopDistance = 0.1f;
-    public float distanceToPlayer;
-    public float distanceToStart;
-    public Vector2 distance;
-    public float Health_;
+    // ─── Движение ──────────────────────────────────────────────────────────
+    [Header("Movement")]
+    public float moveSpeed = 2f;
+    public float stopDistance = 0.4f;
 
-    private Transform player; // ������ �� ������
-    private Vector3 startingPosition; // ��������� ������� �����
-    private Animator anim;
+    // ─── Обнаружение ───────────────────────────────────────────────────────
+    [Header("Detection")]
+    public float activationRadius = 5f;
+    public float chaseDistance = 15f;
+    public float attackRadius = 0.8f;
 
-    public bool IsAttacking = false;
-    public bool IsWalking = false;
-    public bool IsAttackUp;
-    public bool IsAttackDown;
-    public bool IsAttackLeft;
-    public bool IsAttackRight;
-    public bool IsWalkUp;
-    public bool IsWalkDown;
-    public bool IsWalkLeft;
-    public bool IsWalkRight;
-    public bool IsDeathUp;
-    public bool IsDeathDown;
-    public bool IsDeathLeft;
-    public bool IsDeathRight;
-    public bool IsStop;
-    private bool isDie_;
-    private bool IsColliderFind_;
-    private bool Up;
-    private bool Down;
+    // ─── Атака ─────────────────────────────────────────────────────────────
+    [Header("Attack")]
+    public int attackDamage = 1;
+    public float attackCooldown = 1.2f;
 
+    // ─── HP ────────────────────────────────────────────────────────────────
+    [Header("Health")]
+    public float maxHealth = 100f;
+    [Tooltip("Слайдер HP-бара (необязательно)")]
+    public Slider healthBarSlider;
+    [Tooltip("Эффект при получении урона (необязательно)")]
+    public GameObject hitFX;
+    [Tooltip("Эффект при смерти (необязательно)")]
+    public GameObject deathFX;
+
+    public float CurrentHealth { get; private set; }
+    public bool IsDead { get; private set; }
+
+    [Header("AI")]
+    [Tooltip("Выключи чтобы заморозить зомби")]
+    public bool aiEnabled = true;
+
+    // ─── Патруль ───────────────────────────────────────────────────────────
+    [Header("Patrol")]
+    public Transform[] patrolPoints;
+    public float patrolWaitTime = 1.5f;
+
+    // ─── Состояния ─────────────────────────────────────────────────────────
+    public enum ZombieState { Idle, Activating, Patrolling, Chasing, Attacking, Returning, Dead }
+    public ZombieState currentState = ZombieState.Idle;
+
+    // ─── Приватные ─────────────────────────────────────────────────────────
+    private NavMeshAgent _agent;
+    private Animator _anim;
+    private Transform _player;
+    private SoundHandlerEnemy _sfx;
+
+    private static readonly int H_TakeHit = Animator.StringToHash("TakeHit");
+
+    private Vector3 _startPosition;
+    private float _lastAttackTime;
+    private int _patrolIndex = 0;
+    private float _patrolTimer = 0f;
+    private bool _waitingAtPoint = false;
+
+    // ─── Animator hashes ───────────────────────────────────────────────────
+    private static readonly int H_Idle = Animator.StringToHash("Idle_zom");
+    private static readonly int H_Up_w = Animator.StringToHash("Up_w");
+    private static readonly int H_Down_w = Animator.StringToHash("Down_w");
+    private static readonly int H_Left_w = Animator.StringToHash("Left_w");
+    private static readonly int H_Right_w = Animator.StringToHash("Right_w");
+    private static readonly int H_Up_a = Animator.StringToHash("Up_a");
+    private static readonly int H_Down_a = Animator.StringToHash("Down_a");
+    private static readonly int H_Left_a = Animator.StringToHash("Left_a");
+    private static readonly int H_Right_a = Animator.StringToHash("Right_a");
+    private static readonly int H_Death = Animator.StringToHash("Death_2");
+
+    // ══════════════════════════════════════════════════════════════════════
     void Start()
     {
-        seeker = GetComponent<Seeker>();
-        rb_2 = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("Player_1").transform;
-        startingPosition = transform.position;
-        anim = GetComponent<Animator>();
-        Health_ = GetComponent<Enemy_1>().health_enemy;
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
-    }
-    void FixedUpdate()
-    {
-        distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        _agent = GetComponent<NavMeshAgent>();
+        _anim = GetComponent<Animator>();
+        _sfx = GetComponent<SoundHandlerEnemy>();
 
-        // ���������, ��������� �� ����� � �������� ���������� �������������
-        if (distanceToPlayer < chaseDistance)
-        {
-            MoveTowardsPlayer();
-            Animation(player.position);
+        var p = GameObject.FindGameObjectWithTag("Player_1");
+        if (p) _player = p.transform;
 
-            // ���� ����� ������ � �����, �������
-            if (distanceToPlayer < attackRange)
-            {
-                AttackPlayer();
-                Animation(player.position);
-            }
-        }
-        else
-        {
-            // ���� ����� ������, ������������ �� ��������� �������
-            ReturnToStartingPosition();
-            Animation(startingPosition);
-        }
-        Health_ = GetComponent<Enemy_1>().health_enemy;
-        Get_Health();
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            IsColliderFind_ = true;
-        }
-        else
-        {
-            IsColliderFind_ = false;
-        }
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Obstacle")
-        {
-            IsColliderFind_ = true;
-        }
-        else
-        {
-            IsColliderFind_ = false;
-        }
-    }
-    void MoveTowardsPlayer()
-    {
-        if (player != null)
-        {
-            Move();
-            IsWalking = true;
-            IsAttacking = false;
+        _startPosition = transform.position;
 
-            distanceToPlayer = Vector2.Distance(transform.position, player.position);
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+        _agent.speed = moveSpeed;
+        _agent.stoppingDistance = stopDistance;
 
-            // ��������� ������ ���� ����� �� ������� ������
-            if (distanceToPlayer > stopDistance)
-            {
-                rb_2.linearVelocity = direction * moveSpeed;
-            }
-            else
-            {
-                rb_2.linearVelocity = Vector2.zero; // ���������������, ���� ������� ������
-            }
-        }
-        else
-        {
-            rb_2.linearVelocity = Vector2.zero; // ���������������, ���� ������ ���
-        }
-    }
-    void AttackPlayer()
-    {
-        Move();
-        if (Player.Instance.IsAttacking_() == true)
-        {
-            rb_2.linearVelocity = Vector3.zero;
-            IsAttacking = true;
-            IsWalking = false;
-        }
-        else
-        {
-            rb_2.linearVelocity = direction * moveSpeed;
-            IsAttacking = false;
-            IsWalking = true;
-        }
-    }
-    void ReturnToStartingPosition()
-    {
-        // ������������ �� ��������� ���������
-        distanceToStart = Vector2.Distance(transform.position, startingPosition);
-        Vector2 directionToStart = (startingPosition - transform.position).normalized;
+        CurrentHealth = maxHealth;
+        IsDead = false;
 
-        if (distanceToStart > 0.1f) // ��� �������������� ��������
+        SetState(ZombieState.Idle);
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    void Update()
+    {
+        if (currentState == ZombieState.Dead || _player == null || !aiEnabled) return;
+
+        float dist = Vector2.Distance(transform.position, _player.position);
+
+        switch (currentState)
         {
-            rb_2.linearVelocity = directionToStart * moveSpeed;
-            IsWalking = true;
-            IsAttacking = false;
+            case ZombieState.Idle: HandleIdle(dist); break;
+            case ZombieState.Activating: break;
+            case ZombieState.Patrolling: HandlePatrol(dist); break;
+            case ZombieState.Chasing: HandleChase(dist); break;
+            case ZombieState.Attacking: HandleAttack(dist); break;
+            case ZombieState.Returning: HandleReturn(dist); break;
+        }
+    }
+
+    // ══════════════════════════════════════════════════════════════════════
+    #region State Handlers
+
+    void HandleIdle(float dist)
+    {
+        if (dist <= activationRadius)
+            SetState(ZombieState.Activating);
+        else if (patrolPoints != null && patrolPoints.Length > 0)
+            SetState(ZombieState.Patrolling);
+    }
+
+    void HandlePatrol(float dist)
+    {
+        if (dist <= activationRadius) { SetState(ZombieState.Chasing); return; }
+        if (patrolPoints == null || patrolPoints.Length == 0) { SetState(ZombieState.Idle); return; }
+
+        if (_waitingAtPoint)
+        {
+            _agent.isStopped = true;
+            SetMoveAnim(Vector2.zero);
+            _patrolTimer -= Time.deltaTime;
+            if (_patrolTimer <= 0f) { _waitingAtPoint = false; _patrolIndex = (_patrolIndex + 1) % patrolPoints.Length; }
+            return;
+        }
+
+        Transform target = patrolPoints[_patrolIndex];
+        if (Vector2.Distance(transform.position, target.position) < 0.2f)
+        {
+            _waitingAtPoint = true;
+            _patrolTimer = patrolWaitTime;
         }
         else
         {
-            rb_2.linearVelocity = Vector2.zero; // ���������������, ��� ������ �������� ��������� �������
-            IsWalking = false;
-            IsAttacking = false;
+            _agent.isStopped = false;
+            _agent.SetDestination(target.position);
+            SetMoveAnim(Get4Dir(target.position));
         }
     }
-    //������� ����� ��������
-    void Animation(Vector3 direction_point)
+
+    void HandleChase(float dist)
     {
-        distance = direction_point - transform.position;
-        distanceToStart = Vector2.Distance(transform.position, startingPosition);
-        float distanceToPoint = Vector2.Distance(transform.position, direction_point);
-        Up = false;
-        Down = false;
-        IsAttackUp = false;
-        IsAttackDown = false;
-        IsAttackLeft = false;
-        IsAttackRight = false;
-        IsWalkUp = false;
-        IsWalkDown = false;
-        IsWalkLeft = false;
-        IsWalkRight = false;
-        IsStop = false;
-        if (distanceToStart < 0.1f)
-        {
-            IsAttackUp = IsAttackDown = IsAttackLeft = IsAttackRight = false;
-            IsWalkUp = IsWalkDown = IsWalkLeft = IsWalkRight = false;
-            IsDeathUp = IsDeathDown = IsDeathLeft = IsDeathRight = false;
-            IsAttacking = IsWalking = false;
-            IsStop = true;
-        }
-        if ((distance.y < 0) && (Mathf.Abs(distance.y) > 0.9f))
-        {
-            Down = true;
-            if (IsAttacking == true)
-            {
-                IsAttackDown = true;
-                IsWalkDown = false;
-            }
-            if (IsWalking == true)
-            {
-                IsWalkDown = true;
-                IsAttackDown = false;
-            }
-        }
-        if ((distance.y > 0) && (Mathf.Abs(distance.y) > 0.9f))
-        {
-            Up = true;
-            if (IsAttacking == true)
-            {
-                IsAttackUp = true;
-                IsWalkUp = false;
-            }
-            if (IsWalking == true)
-            {
-                IsWalkUp = true;
-                IsAttackUp = false;
-            }
-        }
-        if ((Up == false) && (Down == false))
-        {
-            if (distance.x < 0)
-            {
-                if (IsAttacking == true)
-                {
-                    IsAttackLeft = true;
-                    IsWalkLeft = false;
-                }
-                if (IsWalking == true)
-                {
-                    IsWalkLeft = true;
-                    IsAttackLeft = false;
-                }
-            }
-            if (distance.x > 0)
-            {
-                if (IsAttacking == true)
-                {
-                    IsAttackRight = true;
-                    IsWalkRight = false;
-                }
-                if (IsWalking == true)
-                {
-                    IsWalkRight = true;
-                    IsAttackRight = false;
-                }
-            }
-        }
-        anim.SetBool("Up_w", IsWalkUp);
-        anim.SetBool("Down_w", IsWalkDown);
-        anim.SetBool("Right_w", IsWalkRight);
-        anim.SetBool("Left_w", IsWalkLeft);
-        anim.SetBool("Idle_zom", IsStop);
-        anim.SetBool("Up_a", IsAttackUp);
-        anim.SetBool("Down_a", IsAttackDown);
-        anim.SetBool("Left_a", IsAttackLeft);
-        anim.SetBool("Right_a", IsAttackRight);
-        anim.SetBool("Death_2", isDie_);//�������� � �������� �������
+        if (dist > chaseDistance) { SetState(ZombieState.Returning); return; }
+        if (dist <= attackRadius) { SetState(ZombieState.Attacking); return; }
+
+        _agent.isStopped = false;
+        _agent.SetDestination(_player.position);
+        SetMoveAnim(Get4Dir(_player.position));
     }
-    void Get_Health()
+
+    void HandleAttack(float dist)
     {
-        if (Health_ <= 0)
+        _agent.isStopped = true;
+        SetAttackAnim(Get4Dir(_player.position));
+
+        if (dist > attackRadius * 1.5f) { SetState(ZombieState.Chasing); return; }
+
+        if (Time.time >= _lastAttackTime + attackCooldown)
         {
-            isDie_ = true;
+            _lastAttackTime = Time.time;
+            _player.GetComponent<PlayerHealth>()?.TakeDamage(attackDamage);
+        }
+    }
+
+    void HandleReturn(float dist)
+    {
+        if (dist <= activationRadius) { SetState(ZombieState.Chasing); return; }
+
+        if (Vector2.Distance(transform.position, _startPosition) > 0.2f)
+        {
+            _agent.isStopped = false;
+            _agent.SetDestination(_startPosition);
+            SetMoveAnim(Get4Dir(_startPosition));
         }
         else
         {
-            isDie_ = false;
+            _agent.isStopped = true;
+            SetState(ZombieState.Idle);
         }
     }
+
+    #endregion
+
+    // ══════════════════════════════════════════════════════════════════════
+    #region HP System
+
+    /// <summary>Нанести урон зомби. Вызывай из пуль, ловушек и т.д.</summary>
+    public void TakeDamage(float amount)
+    {
+        if (IsDead) return;
+
+        CurrentHealth = Mathf.Max(0f, CurrentHealth - amount);
+        RefreshHealthBar();
+
+        if (hitFX != null)
+            Instantiate(hitFX, transform.position, Quaternion.identity);
+
+        _sfx?.PlayHitSound();
+
+        if (_anim.HasState(0, H_TakeHit))
+            _anim.SetTrigger(H_TakeHit);
+
+        if (CurrentHealth <= 0f) Die();
+    }
+
+    /// <summary>Убить зомби немедленно.</summary>
+    public void Die()
+    {
+        if (IsDead) return;
+        IsDead = true;
+        CurrentHealth = 0f;
+        RefreshHealthBar();
+
+        if (deathFX != null)
+            Instantiate(deathFX, transform.position, Quaternion.identity);
+
+        SetState(ZombieState.Dead);
+        Destroy(gameObject, 2f);
+    }
+
+    /// <summary>Лечение.</summary>
+    public void Heal(float amount)
+    {
+        if (IsDead) return;
+        CurrentHealth = Mathf.Min(maxHealth, CurrentHealth + amount);
+        RefreshHealthBar();
+    }
+
+    void RefreshHealthBar()
+    {
+        if (healthBarSlider) healthBarSlider.value = CurrentHealth / maxHealth;
+    }
+
+    public float HealthPercent => CurrentHealth / maxHealth;
+
+    #endregion
+
+    // ══════════════════════════════════════════════════════════════════════
+    #region State Machine
+
+    public void SetState(ZombieState newState)
+    {
+        currentState = newState;
+        ResetAnimFlags();
+
+        switch (newState)
+        {
+            case ZombieState.Idle:
+                _agent.isStopped = true;
+                _anim.SetBool(H_Idle, true);
+                break;
+
+            case ZombieState.Activating:
+                _agent.isStopped = true;
+                Invoke(nameof(OnActivationComplete), 0.5f);
+                break;
+
+            case ZombieState.Dead:
+                _agent.isStopped = true;
+                _anim.SetTrigger(H_Death);
+                GetComponent<Collider2D>().enabled = false;
+                enabled = false;
+                break;
+        }
+    }
+
+    void OnActivationComplete()
+    {
+        if (currentState == ZombieState.Activating)
+            SetState(ZombieState.Chasing);
+    }
+
+    #endregion
+
+    // ══════════════════════════════════════════════════════════════════════
+    #region Animation Helpers
+
+    Vector2 Get4Dir(Vector3 target)
+    {
+        Vector2 d = target - transform.position;
+        return Mathf.Abs(d.x) >= Mathf.Abs(d.y)
+            ? (d.x > 0 ? Vector2.right : Vector2.left)
+            : (d.y > 0 ? Vector2.up : Vector2.down);
+    }
+
+    void SetMoveAnim(Vector2 dir)
+    {
+        ResetAnimFlags();
+        if (dir == Vector2.zero) _anim.SetBool(H_Idle, true);
+        else if (dir == Vector2.up) _anim.SetBool(H_Up_w, true);
+        else if (dir == Vector2.down) _anim.SetBool(H_Down_w, true);
+        else if (dir == Vector2.left) _anim.SetBool(H_Left_w, true);
+        else if (dir == Vector2.right) _anim.SetBool(H_Right_w, true);
+    }
+
+    void SetAttackAnim(Vector2 dir)
+    {
+        ResetAnimFlags();
+        if (dir == Vector2.up) _anim.SetBool(H_Up_a, true);
+        else if (dir == Vector2.down) _anim.SetBool(H_Down_a, true);
+        else if (dir == Vector2.left) _anim.SetBool(H_Left_a, true);
+        else if (dir == Vector2.right) _anim.SetBool(H_Right_a, true);
+    }
+
+    void ResetAnimFlags()
+    {
+        _anim.SetBool(H_Idle, false);
+        _anim.SetBool(H_Up_w, false);
+        _anim.SetBool(H_Down_w, false);
+        _anim.SetBool(H_Left_w, false);
+        _anim.SetBool(H_Right_w, false);
+        _anim.SetBool(H_Up_a, false);
+        _anim.SetBool(H_Down_a, false);
+        _anim.SetBool(H_Left_a, false);
+        _anim.SetBool(H_Right_a, false);
+    }
+
+    #endregion
+
+    // ══════════════════════════════════════════════════════════════════════
+    #region Gizmos
+#if UNITY_EDITOR
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, activationRadius);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+
+        UnityEditor.Handles.color = Color.white;
+        UnityEditor.Handles.Label(
+            transform.position + Vector3.up * 1.2f,
+            $"HP: {CurrentHealth:0}/{maxHealth:0}  [{currentState}]");
+    }
+#endif
+    #endregion
 }

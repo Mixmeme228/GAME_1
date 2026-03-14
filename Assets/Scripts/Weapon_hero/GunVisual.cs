@@ -18,10 +18,10 @@ public class GunVisual : MonoBehaviour
     }
     void Update()
     {
-        animGun.SetBool(is_up, Player.Instance.IsShootingUp());
-        animGun.SetBool(is_down, Player.Instance.IsShootingDown());
-        animGun.SetBool(is_left, Player.Instance.IsShootingLeft());
-        animGun.SetBool(is_right, Player.Instance.IsShootingRight());
-        animGun.SetBool(attack, Gun.Instance.IsAttacking());
+        //animGun.SetBool(is_up, Player.Instance.IsShootingUp());
+        //animGun.SetBool(is_down, Player.Instance.IsShootingDown());
+        //animGun.SetBool(is_left, Player.Instance.IsShootingLeft());
+        //animGun.SetBool(is_right, Player.Instance.IsShootingRight());
+        //animGun.SetBool(attack, Gun.Instance.IsAttacking());
     }
 }

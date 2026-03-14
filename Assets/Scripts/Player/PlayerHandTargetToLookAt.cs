@@ -1,25 +1,13 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// This class uses TadaInput.VectorPlayerToMouseWPos to move the local position of a gameobject that's
-/// used as a look at target by the non-trigger hand.
-/// </summary>
+
 public class PlayerHandTargetToLookAt : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
+    
+    
 
-    [TextArea(7,10)]
-    public string Notes = "This class uses the AimDirection of the Crosshair to move the local position of a " +
-        "gameobject that's used as a look at target by the non-trigger hand.\nThis values are hardcoded in " +
-        "the serialized properties, feel free to mess around with them to get a feeling of what each of them " +
-        "do. To reset the values simply right click on top of the script name and hit Reset.";
-    [Space(10)]
+    
 
     [SerializeField] private float lerpSpeed = 2f;
     [SerializeField] private Vector2 sensitivity = new Vector2(0.1f, 1f);

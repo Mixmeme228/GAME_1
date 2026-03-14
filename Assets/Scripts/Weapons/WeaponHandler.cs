@@ -2,32 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// This class is used as a bridge between the player and the weapons, everything that can be done with the 
-/// base class Weapon should be handled by this class.
-/// </summary>
+
 public class WeaponHandler : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+   
+    
 
-    [TextArea(2, 10)]
-    public string notes = "This class is used as a bridge between the player and the weapons, everything that can be done with the " +
-        "base class Weapon should be handled by this class.";
-
-    /// <summary>
-    /// Option for which action should be used when calling UseWeapon.
-    /// </summary>
+    
     public enum ActionType { Primary, Secondary }
 
-    /// <summary>
-    /// Option for how to switch use rates using SwitchUseRate.
-    /// </summary>
+   
     public enum WeaponSwitchMode { Next, Previous, ByIndex }
 
     public Weapon[] weapons;
@@ -37,7 +21,7 @@ public class WeaponHandler : MonoBehaviour
     private bool isUsingPrimaryAction;
     private bool isUsingSecondaryAction;
 
-    // -TODO: Add an animation to the switch action (to have a little delay before being able to shoot again).
+   
 
     private void Start()
     {

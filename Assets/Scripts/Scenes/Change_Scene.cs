@@ -13,7 +13,7 @@ public class Change_Scene : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if ((collision != null) & (collision.gameObject.tag == "Player_1")){
-            Health_new = GameObject.FindGameObjectWithTag("Player_1").GetComponent<Player>().health_hero;
+            //Health_new = GameObject.FindGameObjectWithTag("Player_1").GetComponent<Player>().health_hero;
             HPbarKey_hero h = collision.gameObject.GetComponent<HPbarKey_hero>();
             
             if (h != null)
@@ -43,7 +43,7 @@ public class Change_Scene : MonoBehaviour
                 //тут надо будет во втором параметре поменять координаты (посмотреть где начинается второй уровень и указать те координаты)
                 SceneManager.MoveGameObjectToScene(newG1, newScene);
                 g_1 = newG1;
-                g_1.GetComponent<Player>().health_hero = Health_new;
+                //g_1.GetComponent<Player>().health_hero = Health_new;
                 g_1.GetComponent<HPbarKey_hero>().HP = Health_new;
             };
         }

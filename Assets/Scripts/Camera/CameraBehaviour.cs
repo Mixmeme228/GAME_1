@@ -2,13 +2,13 @@
 
 public class CameraBehaviour : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     [TextArea(4, 10)]
     public string notes = "At the moment the camera can smoothly follow a Transform target by using transform.position = Vector2.Lerp() " +

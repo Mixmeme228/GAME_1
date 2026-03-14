@@ -21,9 +21,9 @@ public class HPbarKey_hero : MonoBehaviour
         dat = GetComponent<DataHero>();
         dat.HP_hero = HP / 100f;
         dat.Count_key = count_Key;
-        Player.Instance.TakeHP += LowerHP;
-        Player.Instance.TakeCount += CountKeyHero;
-        Player.Instance.TakeMed += IncreaseHP;
+        //Player.Instance.TakeHP += LowerHP;
+        //Player.Instance.TakeCount += CountKeyHero;
+        //Player.Instance.TakeMed += IncreaseHP;
     }
     private void LowerHP(object sender, System.EventArgs e)
     {

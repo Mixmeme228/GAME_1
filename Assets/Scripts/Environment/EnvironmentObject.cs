@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnvironmentObject : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     public enum WhenPlayerIsOnPosition { Above, Left, Right, Below }
     public WhenPlayerIsOnPosition startsOnPlayerPosition = WhenPlayerIsOnPosition.Right;

@@ -1,29 +1,13 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// New v2. The gameobject that has this component attached will instantly rotate to make its x or y axis look 
-/// towards the assigned target or towards mouse world position if a exposed enum is selected. The direction can be
-/// inverted by checking isFlipAxis. Also there is an option to disable local update if a linked control is 
-/// needed. It can also use a smooth rotation by enabling isSmoothRotationEnable.
-/// </summary>
+
 public class LookAt2Dv2 : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
+    
+    
 
-    [TextArea(4, 10)]
-    public string notes = "New v2. The gameobject that has this component attached will instantly rotate to make its x or y axis look " +
-        "towards the assigned target or towards mouse world position if a exposed enum is selected. The direction can be inverted by " +
-        "checking isFlipAxis. Also there is an option to disable local update if a linked control is needed. It can also use a " +
-        "smooth rotation by enabling isSmoothRotationEnable.";
-
-    // TargetTransform: Look at the gameobject Transform from the public variable targetTransform.
-    // MouseWorldPosition: Look at the mouse world position stored by the TadaInput class.
+    
     public enum LookAtTarget { TargetTransform, MouseWorldPosition }
     [SerializeField] private LookAtTarget lookAtTarget = LookAtTarget.TargetTransform;
 

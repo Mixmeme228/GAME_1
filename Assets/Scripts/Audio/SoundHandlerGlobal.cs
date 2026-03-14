@@ -5,12 +5,12 @@
 /// </summary>
 public class SoundHandlerGlobal : MonoBehaviour
 {
-    // --------------------------------------
+    
     // - 2D TopDown Isometric Shooter Study -
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     [TextArea(2, 10)]
     public string notes = "To easily play soundFXs on awake or to link to other classes to quickly play sfx using the provided public variables.";

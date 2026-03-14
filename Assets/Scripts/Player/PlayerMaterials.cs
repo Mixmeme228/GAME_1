@@ -5,16 +5,7 @@
 /// </summary>
 public class PlayerMaterials : MonoBehaviour
 {
-    // --------------------------------------
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    // --------------------------------------
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
-
-    [TextArea(4, 10)]
-    public string notes = "This class will be used to control all the behaviours related to the player's materials.";
+    
 
     public Material bodyMaterial;
 

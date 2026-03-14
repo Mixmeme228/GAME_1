@@ -21,31 +21,31 @@ public class Grenada_hero : MonoBehaviour
     }
     private void Update()
     {
-        if (Player.Instance.NowIsShooting_2())
-        {
-            Attack();
-        }
+        //if (Player.Instance.NowIsShooting_2())
+        //{
+        //    Attack();
+        //}
     }
     public void Attack()
     {
-        if (Player.Instance.IsDropingGrenadaUp())
-        {
-            dir_move = Vector2.up;
-        }
-        if (Player.Instance.IsDropingGrenadaDown())
-        {
-            dir_move = - Vector2.up;
-        }
-        if (Player.Instance.IsDropingGrenadaRight())
-        {
-            dir_move = Vector2.right;
-        }
-        if (Player.Instance.IsDropingGrenadaLeft())
-        {
-            dir_move = - Vector2.right;
-        }
-        RB.linearVelocity = dir_move * grenada_speed;
-        //��������� ��� ��������� ������������� �������
+        //if (Player.Instance.IsDropingGrenadaUp())
+        //{
+        //    dir_move = Vector2.up;
+        //}
+        //if (Player.Instance.IsDropingGrenadaDown())
+        //{
+        //    dir_move = - Vector2.up;
+        //}
+        //if (Player.Instance.IsDropingGrenadaRight())
+        //{
+        //    dir_move = Vector2.right;
+        //}
+        //if (Player.Instance.IsDropingGrenadaLeft())
+        //{
+        //    dir_move = - Vector2.right;
+        //}
+        //RB.linearVelocity = dir_move * grenada_speed;
+        ////��������� ��� ��������� ������������� �������
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

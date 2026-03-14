@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class AfterImageHandler : MonoBehaviour
 {
-    // --------------------------------------
+    
     // ----- 2D Isometric Shooter Study -----
     // ----------- by Tadadosi --------------
-    // --------------------------------------
+    
     // ---- Support my work by following ----
     // ---- https://twitter.com/tadadosi ----
-    // --------------------------------------
+    
 
     private List<AfterImageGroup> _AfterImagesGroups = new List<AfterImageGroup>();
 
