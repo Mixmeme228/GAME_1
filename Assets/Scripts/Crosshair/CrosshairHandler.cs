@@ -36,17 +36,17 @@ public class CrosshairHandler : MonoBehaviour
             if (mouseCrosshair.IsActive)
             {
                 mouseCrosshair.IsActive = false;
-                joystickCrosshair.IsActive = true;
+                
             }
 
-            joystickCrosshair.UpdateCrosshair();
+            
         }
         else
         {
             if (!mouseCrosshair.IsActive)
             {
                 mouseCrosshair.IsActive = true;
-                joystickCrosshair.IsActive = false;
+               
             }
 
             mouseCrosshair.UpdateCrosshair();
