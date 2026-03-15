@@ -202,9 +202,14 @@ public class HomingRocket : MonoBehaviour
         if (explosionPrefab != null)
             Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
-        // Урон напрямую через transform игрока — никаких тегов и слоёв
-        if (target != null)
-            target.GetComponent<PlayerHealth>()?.TakeDamage(damage);
+        // Урон всем коллайдерам в радиусе взрыва
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
+        foreach (Collider2D hit in hits)
+        {
+            PlayerHealth ph = hit.GetComponent<PlayerHealth>();
+            if (ph != null)
+                ph.TakeDamage(damage);
+        }
 
         Destroy(gameObject);
     }
