@@ -6,9 +6,6 @@ using UnityEngine;
 public class WeaponHandler : MonoBehaviour
 {
    
-    
-
-    
     public enum ActionType { Primary, Secondary }
 
    
