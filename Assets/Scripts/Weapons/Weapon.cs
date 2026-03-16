@@ -5,9 +5,6 @@
 public class Weapon : MonoBehaviour
 {
     
-    
-    
-
     #region ---------------------------- PROPERTIES
 
     /// <summary>
