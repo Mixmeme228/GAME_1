@@ -1,25 +1,8 @@
 ﻿using UnityEngine;
 
-/// <summary>
-/// Base class that has public methods for actions and a SwitchUseRate method to switch between a given 
-/// float called UseRate which is used to control how often the actions can be called.
-/// </summary>
-
 public class Weapon : MonoBehaviour
 {
-    
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    
-
     #region ---------------------------- PROPERTIES
-
-    /// <summary>
-    /// Option for how to switch use rates using SwitchUseRate.
-    /// </summary>
     public enum SwitchUseRateType { Next, Previous, ByIndex }
 
     [SerializeField] private bool debug = false;

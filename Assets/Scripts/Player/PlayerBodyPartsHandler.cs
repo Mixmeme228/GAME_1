@@ -1,31 +1,20 @@
 ﻿using UnityEngine;
 
-
 public class PlayerBodyPartsHandler : MonoBehaviour
 {
-    
-    
-    
-
-   
-
     [Header("Body parts")]
     public SpriteRenderer[] handRenderers;
     public SpriteRenderer[] headRenderers;
     [Space(5)]
 
-    // Used to invert the legs based on the moving direction
     public GameObject hips;
 
-    // Used to invert the upper body based on the moving direction
     public GameObject upperBody;
 
     private LookAt2Dv2Updater lookAtUpdater;
     private LookAt2Dv2Handler lookAtHandler;
     private PlayerShoulderSecondary shoulderSecondary;
 
-    // To grant access to other classes if the need to know the current direction 
-    // of the body (e.g. Projectile class to set travel direction)
     public static bool isRightDirection;
 
     private bool isHandAndHeadOnFront;
@@ -35,7 +24,6 @@ public class PlayerBodyPartsHandler : MonoBehaviour
 
     private void Awake()
     {
-        // always start with right direction
         isRightDirection = true;
         TryGetComponent(out lookAtUpdater);
         TryGetComponent(out lookAtHandler);
@@ -49,10 +37,8 @@ public class PlayerBodyPartsHandler : MonoBehaviour
         if (PauseController.isGamePaused)
             return;
 
-        // Update all LookAt2Dv2 classes
         lookAtUpdater.UpdateLookAtClasses();
 
-        // Update secondary shoulder rotation
         shoulderSecondary.UpdateRotation();
 
         UpdateLookAtTarget();
@@ -76,19 +62,13 @@ public class PlayerBodyPartsHandler : MonoBehaviour
 
     private void UpdateRenderersLayerOrder()
     {
-        // I'm using hardcoded values to set the sortingOrder of the spriteRenderers. I ended up with this values after assembling the player's body 
-        // and realizing how the parts should overlap one another. Maybe in the future it could be a good idea to make this values private and serialized
-        // to expose them if a quick change in the Inspector is needed.
-
-        if (((CrosshairMouse.AimDirection.y < 0f && TadaInput.IsMouseActive) || 
-            (CrosshairJoystick.AimDirection.y < -0.1f && !TadaInput.IsMouseActive)) && isHandAndHeadOnFront) // Hand and Head behind
+        if ((CrosshairMouse.AimDirection.y < 0f && TadaInput.IsMouseActive) && isHandAndHeadOnFront)
         {
             SetRenderersLayerOrder(handRenderers, 9);
             SetRenderersLayerOrder(headRenderers, 13);
             isHandAndHeadOnFront = false;
         }
-        else if (((CrosshairMouse.AimDirection.y > 0f && TadaInput.IsMouseActive) ||
-            (CrosshairJoystick.AimDirection.y > 0f && !TadaInput.IsMouseActive)) && !isHandAndHeadOnFront) // Hand and Head on front
+        else if ((CrosshairMouse.AimDirection.y > 0f && TadaInput.IsMouseActive) && !isHandAndHeadOnFront )
         {
             SetRenderersLayerOrder(handRenderers, 12);
             SetRenderersLayerOrder(headRenderers, 5);
@@ -109,63 +89,47 @@ public class PlayerBodyPartsHandler : MonoBehaviour
 
     private void UpdateBodyPartsDirection()
     {
-        // Checks if the mouse is active or a joystick is being used and uses either the vector playerPos -> mouseWorldPos or
-        // the AimAxis (Joystick right stick) X value to determine if the body should be poiting to the left or to the right.
-
-        if ((CrosshairMouse.AimDirection.x < -0.1f && TadaInput.IsMouseActive) ||
-            (CrosshairJoystick.AimDirection.x < -0.1f && !TadaInput.IsMouseActive))
+        if (CrosshairMouse.AimDirection.x < -0.1f && TadaInput.IsMouseActive)
         {
             SetBodyPartsDirection(Direction.Left);
         }
 
-        if ((CrosshairMouse.AimDirection.x > 0.1f && TadaInput.IsMouseActive) ||
-            (CrosshairJoystick.AimDirection.x > 0.1f && !TadaInput.IsMouseActive))
+        if (CrosshairMouse.AimDirection.x > 0.1f && TadaInput.IsMouseActive)
         {
             SetBodyPartsDirection(Direction.Right);
         }
     }
 
-    /// <summary>
-    /// Method to visually flip the direction of the body.
-    /// </summary>
     private void SetBodyPartsDirection(Direction direction)
     {
         switch (direction)
         {
             case Direction.Left:
-                // bool to do this action once
                 if (isRightDirection)
                 {
                     lookAtHandler.FlipAxis(true);
 
-                    // Invert the hips
                     if (hips != null)
                         hips.transform.localScale -= Vector3.right * 2;
 
-                    // Invert the upperBody
                     if (upperBody != null)
                         upperBody.transform.localScale -= Vector3.right * 2;
 
-                    // Stop this action
                     isRightDirection = false;
                 }
                 break;
 
             case Direction.Right:
-                // bool to do this action once
                 if (!isRightDirection)
                 {
                     lookAtHandler.FlipAxis(false);
 
-                    // Flip the hips
                     if (hips != null)
                         hips.transform.localScale += Vector3.right * 2;
 
-                    // Flip the upperBody
                     if (upperBody != null)
                         upperBody.transform.localScale += Vector3.right * 2;
 
-                    // Stop this action
                     isRightDirection = true;
                 }
                 break;

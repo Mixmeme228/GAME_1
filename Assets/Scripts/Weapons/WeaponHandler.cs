@@ -2,33 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class WeaponHandler : MonoBehaviour
 {
-   
-    
-
-    
     public enum ActionType { Primary, Secondary }
-
-   
     public enum WeaponSwitchMode { Next, Previous, ByIndex }
-
     public Weapon[] weapons;
-
     private Weapon currentWeapon;
     private int currentWeaponIndex;
     private bool isUsingPrimaryAction;
     private bool isUsingSecondaryAction;
-
-   
-
     private void Start()
     {
         SwitchWeapon(WeaponSwitchMode.ByIndex);
         SwitchUseRate(Weapon.SwitchUseRateType.ByIndex);
     }
-
     private void DisableAllWeapons()
     {
         for (int i = 0; i < weapons.Length; i++)
@@ -37,11 +24,6 @@ public class WeaponHandler : MonoBehaviour
                 weapons[i].gameObject.SetActive(false);
         }
     }
-
-    /// <summary>
-    /// To switch to a different weapon among the stored ones in <see cref="weapons"></see>.
-    /// </summary>
-    /// <param name="index">Used when the type is set to ByIndex.</param>
     public void SwitchWeapon(WeaponSwitchMode mode, int index = 0)
     {
         CheckWeaponsAvailability();
@@ -67,13 +49,6 @@ public class WeaponHandler : MonoBehaviour
         currentWeapon = weapons[currentWeaponIndex];
         currentWeapon.gameObject.SetActive(true);
     }
-
-    /// <summary>
-    /// By default it switchs all weapons use rates to a different value (stored by each weapon). 
-    /// It can also be used to only switch the current weapon value.
-    /// </summary>
-    /// <param name="index">Used when <see cref="Weapon.SwitchUseRateType"/> is set to ByIndex.</param>
-    /// <param name="applyToAllWeapons">True by default</param>
     public void SwitchUseRate(Weapon.SwitchUseRateType type, int index = 0, bool applyToAllWeapons = true)
     {
         CheckWeaponsAvailability();
@@ -90,15 +65,6 @@ public class WeaponHandler : MonoBehaviour
         if (currentWeapon != null)
             currentWeapon.SwitchUseRate(type, index);
     }
-
-    /// <summary>
-    /// This is what makes action happen, it calls the current weapon actions based on <see cref="ActionType"/> type. 
-    /// It got two actions at the moment (Primary, Secondary).
-    /// </summary>
-    /// <param name="type"></param>
-    /// <param name="value">It could either be dinamically added by the player when calling this method 
-    /// or it could be left with the default value (true). This is useful to create actions that relies 
-    /// on this bool to determine if they should be canceled mid process (e.g. charged shot).</param>
     public void UseWeapon(ActionType type, bool value = true)
     {
         CheckWeaponsAvailability();
@@ -125,11 +91,6 @@ public class WeaponHandler : MonoBehaviour
                 break;
         }
     }
-
-    /// <summary>
-    /// To break the execution of the code and log a message in the console if an element 
-    /// from <see cref="weapons"/> has a missing weapon.
-    /// </summary>
     private void CheckWeaponsAvailability()
     {
         for (int i = 0; i < weapons.Length; i++)

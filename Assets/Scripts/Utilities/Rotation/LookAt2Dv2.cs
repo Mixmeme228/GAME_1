@@ -1,38 +1,25 @@
 ﻿using UnityEngine;
 
-
 public class LookAt2Dv2 : MonoBehaviour
 {
-    
-    
-    
-
-    
     public enum LookAtTarget { TargetTransform, MouseWorldPosition }
     [SerializeField] private LookAtTarget lookAtTarget = LookAtTarget.TargetTransform;
 
-    [Tooltip("If you are using a Transform, select TargetTransform from lookAtTarget dropdown list.")]
     public Transform targetTransform;
 
     private enum Axis { X, Y }
     [SerializeField] private Axis axis = Axis.Y;
 
-    [Tooltip("Used when isSmoothRotationEnable is true.")]
     [SerializeField] private float turnRate = 10f;
 
-    [Tooltip("Use to set an initial offset angle or use SetOffsetAngle method to do it via code.")]
     [SerializeField] private float offsetLookAtAngle = 0f;
 
-    [Tooltip("e.g. writing 30 will make the axis have a range of -30 to 30 degrees.")]
     [SerializeField] private float maxAngle = 360f;
 
-    [Tooltip("Check to let this behaviour be run by the local Update() method and Uncheck if you want to call it from any other class by using UpdateLookAt().")]
     [SerializeField] private bool isUpdateCalledLocally = false;
 
-    [Tooltip("Check to smoothly rotate towards target rotation using turnRate as variable.")]
     public bool isSmoothRotationEnable = false;
 
-    [Tooltip("Check to flip the axis and use the negative side to look at")]
     public bool isFlipAxis = false;
 
     [Header("Debug")]
@@ -66,10 +53,8 @@ public class LookAt2Dv2 : MonoBehaviour
             targetPosition = targetTransform.position;
         }
 
-        // Ensure there is no 3D rotation by aligning Z position
         targetPosition.z = myPosition.z;
 
-        // Vector from this object towards the target position
         direction = (targetPosition - myPosition).normalized;
 
         switch (axis)
@@ -78,12 +63,10 @@ public class LookAt2Dv2 : MonoBehaviour
 
                 if (!isFlipAxis)
                 {
-                    // Rotate direction by 90 degrees around the Z axis
                     upwardAxis = Quaternion.Euler(0, 0, 90 + offsetLookAtAngle) * direction;
                 }
                 else
                 {
-                    // Rotate direction by -90 degrees around the Z axis
                     upwardAxis = Quaternion.Euler(0, 0, -90 + offsetLookAtAngle) * direction;
                 }
                 break;
@@ -100,8 +83,6 @@ public class LookAt2Dv2 : MonoBehaviour
                 break;
         }
 
-        // Get the rotation that points the Z axis forward, and the X or Y axis 90° away from the target
-        // (resulting in the Y or X axis facing the target).
         Quaternion targetRotation = Quaternion.LookRotation(forward: Vector3.forward, upwards: upwardAxis);
 
         if (debug)
@@ -109,16 +90,13 @@ public class LookAt2Dv2 : MonoBehaviour
 
         if (!isSmoothRotationEnable)
         {
-            // Update the rotation if it's inside the maxAngle limits.
             if (Quaternion.Angle(Quaternion.identity, targetRotation) < maxAngle)
                 transform.rotation = targetRotation;
             return;
         }
 
-        // Smooth rotation.
         Quaternion rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnRate * Time.deltaTime);
 
-        // Update the rotation if it's inside the maxAngle limits.
         if (Quaternion.Angle(Quaternion.identity, rotation) < maxAngle)
             transform.rotation = rotation;
     }

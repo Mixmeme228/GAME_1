@@ -1,11 +1,7 @@
 ﻿using UnityEngine;
 
-
 public class PlayerShoulderSecondary : MonoBehaviour
 {
-    
-    
-
     [SerializeField] private float rate = 60f;
     [SerializeField] private float minOffsetAngle = 0f;
     [SerializeField] private float maxOffsetAngle = 50f;
@@ -26,7 +22,6 @@ public class PlayerShoulderSecondary : MonoBehaviour
 
     public void UpdateRotation()
     {
-        // I got this hardcoded values after testing them in the Inspector.
         if (PlayerBodyPartsHandler.isRightDirection)
         {
             minOffsetAngle = 0f;
@@ -40,8 +35,6 @@ public class PlayerShoulderSecondary : MonoBehaviour
 
         if (TadaInput.IsMouseActive)
             clampAngle = Mathf.Clamp(CrosshairMouse.AimDirection.y * rate, minOffsetAngle, maxOffsetAngle);
-        else
-            clampAngle = Mathf.Clamp(CrosshairJoystick.AimDirection.y * rate, minOffsetAngle, maxOffsetAngle);
 
         transform.rotation = shoulderMain.rotation;
         transform.rotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + clampAngle);

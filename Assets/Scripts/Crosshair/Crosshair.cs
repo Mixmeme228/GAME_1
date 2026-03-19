@@ -2,14 +2,6 @@
 
 public class Crosshair : MonoBehaviour
 {
-    
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    
-
     [Tooltip("The gameobject that will be used to visually represent the crosshair.")]
     public GameObject crosshair;
 
@@ -24,9 +16,6 @@ public class Crosshair : MonoBehaviour
 
     public virtual void UpdateCrosshair() { }
 
-    /// <summary>
-    /// To get or set the active state of the gameobject used to visually represent the crosshair.
-    /// </summary>
     public bool IsActive
     {
         get { return _IsActive; }

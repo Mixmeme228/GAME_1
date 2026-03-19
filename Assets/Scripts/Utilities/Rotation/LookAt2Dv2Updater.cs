@@ -3,12 +3,6 @@
 
 public class LookAt2Dv2Updater : MonoBehaviour
 {
-    
-   
-    
-
-    
-
     public LookAt2Dv2[] lookAtsToUpdate;
 
     public void UpdateLookAtClasses()

@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     [Header("Damage")]
     [SerializeField] private float _Damage = 10f;
-    public float Damage => _Damage;   // геттер для BossAI
+    public float Damage => _Damage; 
 
     [Header("FXs")]
     [SerializeField] private GameObject hitPFX = null;
@@ -69,7 +69,6 @@ public class Projectile : MonoBehaviour
     {
         if (impactCount > 0) return;
 
-        // Сначала проверяем босса — независимо от тега
         BossAI boss = collision.GetComponent<BossAI>();
         if (boss != null)
         {

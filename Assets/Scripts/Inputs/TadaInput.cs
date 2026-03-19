@@ -3,86 +3,49 @@
 
 public class TadaInput : MonoBehaviour
 {
-    
-    
-    
-
     [TextArea(2, 10)]
     public string notes = "This class have public static input variables and methods that can be easily accessed by any other class.";
 
     private readonly static bool debug = false;
 
-   
-
-   
-
     public static bool IsMouseActive { get { return _isMouseActive; } private set { _isMouseActive = value; } }
     private static bool _isMouseActive;
 
-    /// <summary>
-    /// Mouse input from (-1,-1) to (1,1).
-    /// </summary>
     public static Vector3 MouseInput { get { return _MouseInput; } private set { _MouseInput = value; } }
     private static Vector3 _MouseInput;
 
-    /// <summary>
-    /// Mouse position in pixel coordinates.
-    /// </summary>
     public static Vector3 MousePixelPos { get { return _MousePixelPos; } private set { _MousePixelPos = value; } }
     private static Vector3 _MousePixelPos;
 
-    /// <summary>
-    /// Mouse position in world coordinates.
-    /// </summary>
     public static Vector3 MouseWorldPos { get { return _MouseWorldPos; } private set { _MouseWorldPos = value; } }
     private static Vector3 _MouseWorldPos;
 
-   
-
-    
     public enum ThisKey
     { 
         None, MoveLeft, MoveRight, MoveUp, MoveDown, PrimaryAction, SecondaryAction,
-        PreviousWeapon, NextWeapon, PreviousUseRate, NextUseRate, Xbox360RightTrigger,
-        Xbox360LeftTrigger, MouseAnyMovement, Dash, Pause, Count
+        PreviousWeapon, NextWeapon, PreviousUseRate, NextUseRate, 
+        MouseAnyMovement, Dash, Pause, Count
     }
     private static ThisKey[] currentKeys;
     private static ThisKey[] currentKeysDown;
     private static ThisKey[] currentKeysUp;
     private static bool[] currentAxisDown;
 
-    /// <summary>
-    /// Keyboard WASD or Joystick Left Stick with smooth filtering.
-    /// </summary>
     public static Vector2 MoveAxisSmoothInput { get { return _MoveAxisSmoothInput; } private set { _MoveAxisSmoothInput = value; } }
     private static Vector2 _MoveAxisSmoothInput;
 
-    /// <summary>
-    /// Keyboard WASD or Joystick Left Stick without smooth filtering.
-    /// </summary>
     public static Vector2 MoveAxisRawInput { get { return _MoveAxisRawInput; } private set { _MoveAxisRawInput = value; } }
     private static Vector2 _MoveAxisRawInput;
 
-    /// <summary>
-    /// Joystick Right Stick with smooth filtering.
-    /// </summary>
     public static Vector2 AimAxisSmoothInput { get { return _AimAxisSmoothInput; } private set { _AimAxisSmoothInput = value; } }
     private static Vector2 _AimAxisSmoothInput;
 
-    /// <summary>
-    /// Joystick Right Stick without smooth filtering.
-    /// </summary>
     public static Vector2 AimAxisRawInput { get { return _AimAxisRawInput; } private set { _AimAxisRawInput = value; } }
     private static Vector2 _AimAxisRawInput;
 
-    // To stop the mouse scrollwheel from infinitely registering KeyUp.
     private bool isScrollWheelActive;
-
    
-
     private Camera cam;
-
-    
 
     private void Awake()
     {
@@ -92,15 +55,9 @@ public class TadaInput : MonoBehaviour
 
     private void Update()
     {
-        
-
         if (_MouseInput.sqrMagnitude > 0)
             if (!_isMouseActive)
                 _isMouseActive = true;
-
-        if (_AimAxisRawInput.sqrMagnitude > 0)
-            if (_isMouseActive)
-                _isMouseActive = false;
 
         _MouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         if (_MouseInput.magnitude > 1)
@@ -110,10 +67,6 @@ public class TadaInput : MonoBehaviour
         _MousePixelPos.z = 20f;
         _MouseWorldPos = cam.ScreenToWorldPoint(_MousePixelPos);
         _MouseWorldPos.z = 0f;
-
-      
-
-      
 
         _MoveAxisSmoothInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
@@ -128,10 +81,9 @@ public class TadaInput : MonoBehaviour
         if (_MoveAxisRawInput.magnitude > 1)
             _MoveAxisRawInput *= (100f / _MoveAxisRawInput.magnitude) / 100f;
 
-        
         _AimAxisSmoothInput = new Vector2(Input.GetAxis("HorizontalAim"), Input.GetAxis("VerticalAim"));
 
-        
+        if (_AimAxisRawInput.magnitude > 1)
             _AimAxisSmoothInput *= (100f / _AimAxisSmoothInput.magnitude) / 100f;
 
         _AimAxisRawInput = new Vector2(Input.GetAxisRaw("HorizontalAim"), Input.GetAxisRaw("VerticalAim"));
@@ -139,18 +91,6 @@ public class TadaInput : MonoBehaviour
         // Clamp axis magnitude to have a value that doesn't go higher than 1 if it's a diagonal vector.
         if (_AimAxisRawInput.magnitude > 1)
             _AimAxisRawInput *= (100f / _AimAxisRawInput.magnitude) / 100f;
-
-        
-
-       
-        StoreCurrentAxisAsKeyType(ThisKey.Xbox360RightTrigger, Input.GetAxis("Xbox360RightTrigger"));
-        StoreCurrentAxisAsKeyType(ThisKey.Xbox360LeftTrigger, Input.GetAxis("Xbox360LeftTrigger"));
-
-       
-
-       
-
-       
 
         if (Input.GetKey(KeyCode.A))
             StoreCurrentKey(ThisKey.MoveLeft);
@@ -164,15 +104,11 @@ public class TadaInput : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
             StoreCurrentKey(ThisKey.MoveDown);
 
-        if (Input.GetMouseButton(0) || GetKey(ThisKey.Xbox360RightTrigger))
+        if (Input.GetMouseButton(0))
             StoreCurrentKey(ThisKey.PrimaryAction);
 
-        if (Input.GetMouseButton(1) || GetKey(ThisKey.Xbox360LeftTrigger))
+        if (Input.GetMouseButton(1))
             StoreCurrentKey(ThisKey.SecondaryAction);
-
-      
-
-       
 
         if (Input.GetKeyDown(KeyCode.A))
             StoreCurrentKeyDown(ThisKey.MoveLeft);
@@ -186,28 +122,28 @@ public class TadaInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
             StoreCurrentKeyDown(ThisKey.MoveDown);
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button5))
+        if (Input.GetKeyDown(KeyCode.Space))
             StoreCurrentKeyDown(ThisKey.Dash);
 
         if (Input.GetKeyDown(KeyCode.C))
             StoreCurrentKeyDown(ThisKey.PreviousUseRate);
 
-        if (Input.GetKeyDown(KeyCode.V) || Input.GetKeyDown(KeyCode.Joystick1Button9))
+        if (Input.GetKeyDown(KeyCode.V))
             StoreCurrentKeyDown(ThisKey.NextUseRate);
 
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button1))
+        if (Input.GetKeyDown(KeyCode.E))
             StoreCurrentKeyDown(ThisKey.NextWeapon);
 
-        if (Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        if (Input.GetKeyDown(KeyCode.Q))
             StoreCurrentKeyDown(ThisKey.PreviousWeapon);
 
-        if (Input.GetMouseButtonDown(0) || GetKeyDown(ThisKey.Xbox360RightTrigger))
+        if (Input.GetMouseButtonDown(0))
             StoreCurrentKeyDown(ThisKey.PrimaryAction);
 
-        if (Input.GetMouseButtonDown(1) || GetKeyDown(ThisKey.Xbox360LeftTrigger))
+        if (Input.GetMouseButtonDown(1))
             StoreCurrentKeyDown(ThisKey.SecondaryAction);
 
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        if (Input.GetKeyDown(KeyCode.Escape))
             StoreCurrentKeyDown(ThisKey.Pause);
 
         if (Input.mouseScrollDelta.y > 0)
@@ -222,9 +158,6 @@ public class TadaInput : MonoBehaviour
             StoreCurrentKeyDown(ThisKey.PreviousWeapon);
         }
 
-       
-
-
         if (Input.GetKeyUp(KeyCode.A))
             StoreCurrentKeyUp(ThisKey.MoveLeft);
 
@@ -237,7 +170,7 @@ public class TadaInput : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.S))
             StoreCurrentKeyUp(ThisKey.MoveDown);
 
-        if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.Joystick1Button5))
+        if (Input.GetKeyUp(KeyCode.Space))
             StoreCurrentKeyUp(ThisKey.Dash);
 
         if (Input.GetKeyUp(KeyCode.C))
@@ -246,22 +179,22 @@ public class TadaInput : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.V))
             StoreCurrentKeyUp(ThisKey.NextUseRate);
 
-        if (Input.GetKeyUp(KeyCode.V) || Input.GetKeyUp(KeyCode.Joystick1Button9))
+        if (Input.GetKeyUp(KeyCode.V))
             StoreCurrentKeyUp(ThisKey.NextUseRate);
 
-        if (Input.GetKeyUp(KeyCode.E) || Input.GetKeyUp(KeyCode.Joystick1Button1))
+        if (Input.GetKeyUp(KeyCode.E))
             StoreCurrentKeyUp(ThisKey.NextWeapon);
 
-        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Joystick1Button0))
+        if (Input.GetKeyUp(KeyCode.Q))
             StoreCurrentKeyUp(ThisKey.PreviousWeapon);
 
-        if (Input.GetMouseButtonUp(0) || GetKeyUp(ThisKey.Xbox360RightTrigger))
+        if (Input.GetMouseButtonUp(0))
             StoreCurrentKeyUp(ThisKey.PrimaryAction);
 
-        if (Input.GetMouseButtonUp(1) || GetKeyUp(ThisKey.Xbox360LeftTrigger))
+        if (Input.GetMouseButtonUp(1))
             StoreCurrentKeyUp(ThisKey.SecondaryAction);
 
-        if (Input.GetKeyUp(KeyCode.Escape) || Input.GetKeyUp(KeyCode.Joystick1Button7))
+        if (Input.GetKeyUp(KeyCode.Escape))
             StoreCurrentKeyUp(ThisKey.Pause);
 
         // TODO: Improve mouseScrollDelta input conditions.
@@ -271,15 +204,8 @@ public class TadaInput : MonoBehaviour
             StoreCurrentKeyUp(ThisKey.PreviousWeapon);
             isScrollWheelActive = false;
         }
-
-      
-
-        
     }
 
-    /// <summary>
-    /// Returns true while the user is holding the key identified by the key ThisKey enum parameter.
-    /// </summary>
     public static bool GetKey(ThisKey key)
     {
         int index = (int)key;
@@ -293,9 +219,6 @@ public class TadaInput : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Returns true during the frame the user start pressing down the key identified by the key ThisKey enum parameter.
-    /// </summary>
     public static bool GetKeyDown(ThisKey key)
     {
         int index = (int)key;
@@ -309,9 +232,6 @@ public class TadaInput : MonoBehaviour
         return false;
     }
 
-    /// <summary>
-    /// Returns true during the frame the user releases the key identified by the key ThisKey enum parameter.
-    /// </summary>
     public static bool GetKeyUp(ThisKey key)
     {
         int index = (int)key;

@@ -1,11 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// HP-бар игрока для Canvas.
-/// Повесь на пустой GameObject внутри Canvas.
-/// Сегменты создаются автоматически как дочерние Image.
-/// </summary>
 public class PlayerHealthBar : MonoBehaviour
 {
     public PlayerHealth player;
@@ -24,7 +19,6 @@ public class PlayerHealthBar : MonoBehaviour
     private Image[] segments;
     private int lastShown = -1;
 
-    // ═══════════════════════════════════════════════
     void Start()
     {
         BuildSegments();
@@ -43,7 +37,6 @@ public class PlayerHealthBar : MonoBehaviour
         Refresh(player.HealthPercent);
     }
 
-    // ═══════════════════════════════════════════════
     void BuildSegments()
     {
         segments = new Image[totalSegments];

@@ -270,10 +270,8 @@ GameObject:
   - component: {fileID: 3229549870842502337}
   - component: {fileID: 8752473211695331478}
   - component: {fileID: 5177164045022777684}
-  - component: {fileID: 5928027929161256805}
   - component: {fileID: 5630874136722976381}
   - component: {fileID: 4860309642444638363}
-  - component: {fileID: 6975450477895996990}
   m_Layer: 3
   m_Name: Enemy
   m_TagString: Enemy
@@ -368,9 +366,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   stopDistance: 0.1
-  activationRadius: 14
-  chaseDistance: 20
-  attackRadius: 9
+  activationRadius: 15
+  chaseDistance: 15
+  attackRadius: 15
   attackDamage: 0
   attackCooldown: 2
   bulletPrefab: {fileID: 1799498612625121595, guid: 8d7c8a3e9af7d6e4d919cfc68c9ed3c5, type: 3}
@@ -482,34 +480,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5928027929161256805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5270890385019477775}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!70 &5630874136722976381
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -569,27 +539,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &6975450477895996990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5270890385019477775}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c1ae29f5989f64abcadfd5d4b0f20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 8431491712097106128}
-  nextWaypointDistance: 0.1
-  currentWaypoint: 0
-  reachedEndOfPath: 0
-  seeker: {fileID: 5928027929161256805}
-  rb_2: {fileID: 3229549870842502337}
-  direction: {x: 0, y: 0}
-  force: {x: 0, y: 0}
-  distanceToPath: 0
 --- !u!1 &6767465204889763686
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,6 @@
 
 public class LookAt2Dv2Handler : MonoBehaviour
 {
-   
-    
-
-    
-
     public LookAt2Dv2[] lookAts;
 
     private void Awake()

@@ -3,10 +3,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-/// <summary>
-/// HP игрока — такая же система как у Robot и ZombieAI.
-/// Повесь на корневой GameObject игрока с тегом Player_1.
-/// </summary>
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Health")]
@@ -31,12 +27,10 @@ public class PlayerHealth : MonoBehaviour
     public bool IsDead { get; private set; }
     public float HealthPercent => CurrentHealth / maxHealth;
 
-    // ─── Приватные ───────────────────────────────────────────────────
     private float invincibleTimer = 0f;
     private SpriteRenderer sr;
     private SoundHandlerLocal sfx;
 
-    // ═══════════════════════════════════════════════════════════════════
     private void Awake()
     {
         TryGetComponent(out sr);
@@ -56,9 +50,6 @@ public class PlayerHealth : MonoBehaviour
             invincibleTimer -= Time.deltaTime;
     }
 
-    // ═══════════════════════════════════════════════════════════════════
-    //  УРОН
-    // ═══════════════════════════════════════════════════════════════════
     public void TakeDamage(float amount)
     {
         if (IsDead) return;
@@ -80,9 +71,6 @@ public class PlayerHealth : MonoBehaviour
             Die();
     }
 
-    // ═══════════════════════════════════════════════════════════════════
-    //  ЛЕЧЕНИЕ
-    // ═══════════════════════════════════════════════════════════════════
     public void Heal(float amount)
     {
         if (IsDead) return;
@@ -90,9 +78,6 @@ public class PlayerHealth : MonoBehaviour
         RefreshHealthBar();
     }
 
-    // ═══════════════════════════════════════════════════════════════════
-    //  СМЕРТЬ → ПЕРЕЗАПУСК СЦЕНЫ
-    // ═══════════════════════════════════════════════════════════════════
     public void Die()
     {
         if (IsDead) return;
@@ -113,7 +98,6 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // ═══════════════════════════════════════════════════════════════════
     private void RefreshHealthBar()
     {
         if (healthBarSlider != null)
