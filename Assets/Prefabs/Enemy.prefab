@@ -368,9 +368,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   stopDistance: 0.1
-  activationRadius: 25
-  chaseDistance: 25
-  attackRadius: 25
+  activationRadius: 15
+  chaseDistance: 15
+  attackRadius: 15
   attackDamage: 0
   attackCooldown: 2
   bulletPrefab: {fileID: 1799498612625121595, guid: 8d7c8a3e9af7d6e4d919cfc68c9ed3c5, type: 3}
