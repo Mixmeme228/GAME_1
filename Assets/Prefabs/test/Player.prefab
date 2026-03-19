@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3992259378425912902}
   - component: {fileID: 1548563280778790963}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8122198480968141498}
   - component: {fileID: 8810427824870930799}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FootTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4214910565288844174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Projectile_SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8062131517879327160}
   - component: {fileID: 4020621902331112436}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Anim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8042386153730846309}
   - component: {fileID: 4771320299296221602}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnergyLines_Battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471647916368728947}
   - component: {fileID: 4600981953539682043}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserRifle_Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 6883079636745049549}
   - component: {fileID: 7654280635798283310}
   - component: {fileID: 5799838116391996022}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Calf_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,12 +572,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -4767077875519243275, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -1691631544, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.09375, y: 0.1875}
+  m_Size: {x: 0.1875, y: 0.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -595,14 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &1443626058938310944
 GameObject:
@@ -615,7 +607,7 @@ GameObject:
   - component: {fileID: 2912217173899075237}
   - component: {fileID: 6738317216836042687}
   - component: {fileID: 5172820657052224593}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -680,8 +672,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 264992037
+  m_SortingLayer: 1
   m_SortingOrder: 3
   m_Sprite: {fileID: 6410556715607256145, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -691,7 +683,7 @@ SpriteRenderer:
   m_Size: {x: 0.375, y: 0.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &5172820657052224593
@@ -706,14 +698,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &1791738833291648640
 GameObject:
@@ -727,7 +711,7 @@ GameObject:
   - component: {fileID: 3216205789184209450}
   - component: {fileID: 3441547218621731341}
   - component: {fileID: 3252550120731735798}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hand_L ------ LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,12 +777,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
-  m_Sprite: {fileID: 262797768175272805, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -1814674453, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.125, y: 0.0625}
+  m_Size: {x: 0.25, y: 0.125}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -816,11 +800,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa390996960a9e4faa0e6cdfabaa2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: New v2. The gameobject that has this component attached will instantly rotate
-    to make its x or y axis look towards the assigned target or towards mouse world
-    position if a exposed enum is selected. The direction can be inverted by checking
-    isFlipAxis. Also there is an option to disable local update if a linked control
-    is needed. It can also use a smooth rotation by enabling isSmoothRotationEnable.
   lookAtTarget: 0
   targetTransform: {fileID: 6547620299712791684}
   axis: 1
@@ -844,14 +823,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &1838158522774955176
 GameObject:
@@ -863,7 +834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5243916028185679856}
   - component: {fileID: 1256230430444752522}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,13 +899,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -1
-  m_Sprite: {fileID: 683266542051834943, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 1522817619, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 0.09375}
+  m_Size: {x: 1.125, y: 0.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -949,7 +920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6919071211237621336}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -983,7 +954,7 @@ GameObject:
   - component: {fileID: 7226831009436855332}
   - component: {fileID: 8708301640158029410}
   - component: {fileID: 3498818035139720590}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thigh_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1050,12 +1021,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: -4698041866631695681, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: 1669662851, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.0625, y: 0.125}
+  m_Size: {x: 0.125, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1073,14 +1044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &1978582841392138440
 GameObject:
@@ -1092,7 +1055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4812317034014030221}
   - component: {fileID: 5730761777638181513}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FootTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1241,7 +1204,7 @@ GameObject:
   - component: {fileID: 443024990273364583}
   - component: {fileID: 8158727447723843750}
   - component: {fileID: 2685406682800122803}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1308,13 +1271,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
-  m_Sprite: {fileID: -2064690921117727531, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_SortingOrder: 7
+  m_Sprite: {fileID: -7411070185107776040, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.28125, y: 0.25}
+  m_Size: {x: 0.5625, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1332,14 +1295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &3049869238990656192
 GameObject:
@@ -1352,7 +1307,7 @@ GameObject:
   - component: {fileID: 3556435142995896660}
   - component: {fileID: 4927021715534151099}
   - component: {fileID: 3875202995090490802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hand_R --------- Weapons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1422,12 +1377,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 11
-  m_Sprite: {fileID: -483578750328476101, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: 767667404, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.125, y: 0.09375}
+  m_Size: {x: 0.25, y: 0.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1445,14 +1400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &3344480133181200590
 GameObject:
@@ -1465,7 +1412,7 @@ GameObject:
   - component: {fileID: 6277434945108023678}
   - component: {fileID: 2492308893376152207}
   - component: {fileID: 7849939798327160878}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pivot_Shoulder_Main ------- LookAt MousePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,11 +1447,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa390996960a9e4faa0e6cdfabaa2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: New v2. The gameobject that has this component attached will instantly rotate
-    to make its x or y axis look towards the assigned target or towards mouse world
-    position if a exposed enum is selected. The direction can be inverted by checking
-    isFlipAxis. Also there is an option to disable local update if a linked control
-    is needed. It can also use a smooth rotation by enabling isSmoothRotationEnable.
   lookAtTarget: 1
   targetTransform: {fileID: 0}
   axis: 0
@@ -1528,8 +1470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f26d3a1dc864294eb1e709f08888e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: This class only exists to act as a realiable way to let other classes find
-    it (e.g. CrosshairJoystick).
 --- !u!1 &3555960840683916944
 GameObject:
   m_ObjectHideFlags: 0
@@ -1541,7 +1481,7 @@ GameObject:
   - component: {fileID: 4241541096394270975}
   - component: {fileID: 8472128221763454230}
   - component: {fileID: 2350065685917356662}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ForeArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,12 +1548,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: -8526789749135792402, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: 2027922645, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.0625, y: 0.09375}
+  m_Size: {x: 0.125, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1631,14 +1571,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &3655374049459728851
 GameObject:
@@ -1649,7 +1581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8120769168887805843}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Arms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1685,7 +1617,7 @@ GameObject:
   - component: {fileID: 7073635897112043367}
   - component: {fileID: 6743475353773381953}
   - component: {fileID: 2525685814076608892}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Neck_Decal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1751,12 +1683,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 6
-  m_Sprite: {fileID: 1820985825349864295, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -439181125, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.125, y: 0.03125}
+  m_Size: {x: 0.25, y: 0.0625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1774,14 +1706,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &3904930682163797456
 GameObject:
@@ -1794,7 +1718,7 @@ GameObject:
   - component: {fileID: 3165253973366473251}
   - component: {fileID: 5487313517774620123}
   - component: {fileID: 316738710380553368}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1860,12 +1784,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 5245983755355312981, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -427588484, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.1875, y: 0.28125}
+  m_Size: {x: 0.375, y: 0.5625}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1883,14 +1807,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &4374835861573366262
 GameObject:
@@ -1902,7 +1818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9149969507193615744}
   - component: {fileID: 5584544859017164401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyeTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2050,7 +1966,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5635528258841055523}
   - component: {fileID: 7685889398238739779}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pivot_Shoulder_Secondary - Class
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2085,12 +2001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdaab0eadbdc524ba2739611da345d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: This class uses the Crosshair AimDirection and other properties like rate,
-    min offset angle and max offset angle to determine an offset angle that will
-    be added to the secondary shoulder as an extra rotation. This is an important
-    part of the behaviour that controls the rotation of the shoulders, with the correct
-    values both shoulders match their rotation in relation to the weapon that's being
-    held by the character.
   rate: 60
   minOffsetAngle: 0
   maxOffsetAngle: 50
@@ -2107,7 +2017,7 @@ GameObject:
   - component: {fileID: 3688626582019261025}
   - component: {fileID: 1945310165645787842}
   - component: {fileID: 5715689928991123316}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpperArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2174,12 +2084,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: 3100863930187566975, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: 992001917, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.09375, y: 0.125}
+  m_Size: {x: 0.125, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2197,14 +2107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &4719023752542206620
 GameObject:
@@ -2217,7 +2119,7 @@ GameObject:
   - component: {fileID: 2051568393641544636}
   - component: {fileID: 4324022817432756881}
   - component: {fileID: 1798656121266935103}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2284,12 +2186,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: 8338566346687922264, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -2122168022, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.125, y: 0.09375}
+  m_Size: {x: 0.25, y: 0.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2307,14 +2209,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &5065927013102114094
 GameObject:
@@ -2325,7 +2219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8437700562211729776}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ForeArm_L -- TargetToLookAt
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -2358,7 +2252,7 @@ GameObject:
   - component: {fileID: 2423695088886370494}
   - component: {fileID: 108073139695924399}
   - component: {fileID: 1859429039010729212}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Calf_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2425,12 +2319,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 4487770151356650576, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -1662153885, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.09375, y: 0.1875}
+  m_Size: {x: 0.1875, y: 0.375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2448,14 +2342,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List. This list is then used by that class to set Active all the
-    AfterImages stored in each group. I made it like this to avoid the hassle of
-    manually creating a bunch of after images and the pain it could be to change
-    them all if I ever needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &5315130056008941156
 GameObject:
@@ -2467,7 +2353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4679323782961249160}
   - component: {fileID: 1186635850230026864}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Dash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2527,13 +2413,13 @@ GameObject:
   - component: {fileID: 9125981403056182581}
   - component: {fileID: 5679930693288976184}
   - component: {fileID: 7771699826984774178}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserBeam_Rifle_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &773612971019167271
 Transform:
   m_ObjectHideFlags: 0
@@ -2643,9 +2529,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   _UseRate: 0
-  notes: This is a derived class from the base class Weapon. It has a primary action
-    to shoot projectiles based on a UseRate value and a secondary action with a timer
-    that after reaching its duration will shoot a secondary projectile.
   basicProjectilePrefab: {fileID: 1799498612625121595, guid: 760aecbdd621ba2478a32a6a7ea5f887, type: 3}
   chargedProjectilePrefab: {fileID: 1799498612625121595, guid: 711af070ba424d1429c60882816125ee, type: 3}
   projectileSpawnPoint: {fileID: 5522450274405710223}
@@ -2664,7 +2547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getAnimInChild: 0
-  notes: This class has methods to handle the animations of the derived class W_ShootProjectileCanCharge.
 --- !u!114 &5679930693288976184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2677,10 +2559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a205ac62bbb04547bf088cdefc3ffb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: Any gameobject with this class will have an AudioSource and will be able
-    to easily play sounds on start() or link to other classes to quickly play sounds
-    using the provided public variables. Make sure to disable AudioSource Play On
-    Awake.
   sounds:
   - notes: 
     clip: {fileID: 8300000, guid: 0371498ebbd6306488066dfbdda41460, type: 3}
@@ -2797,7 +2675,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2529230251267737888}
   - component: {fileID: 7233831223373413498}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EyeTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2945,7 +2823,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3019707907493732529}
   - component: {fileID: 5640497809963159511}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnergyLines_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3033,7 +2911,7 @@ GameObject:
   - component: {fileID: 3357991211037097649}
   - component: {fileID: 4590272372252279634}
   - component: {fileID: 2000195728533299413}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Thigh_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3100,12 +2978,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 8968582544998406026, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -1028182201, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.0625, y: 0.125}
+  m_Size: {x: 0.125, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3123,14 +3001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &5958840849295626179
 GameObject:
@@ -3142,7 +3012,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2549164606464736814}
   - component: {fileID: 6365134610627356842}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BarrelPiece_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3229,7 +3099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7389686920640424320}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpperBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3263,7 +3133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5522450274405710223}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Projectile_SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3294,7 +3164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6991292278239123114}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Charge_PFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3327,7 +3197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3522864442479281685}
   - component: {fileID: 3785585469621327026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BarrelPiece_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3416,7 +3286,7 @@ GameObject:
   - component: {fileID: 3959395728809213846}
   - component: {fileID: 3730790168537462653}
   - component: {fileID: 7325913974756896606}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ForeArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3483,12 +3353,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: 3100863930187566975, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: 992001917, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.0625, y: 0.09375}
+  m_Size: {x: 0.125, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -3506,14 +3376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &7215176374417374261
 GameObject:
@@ -3525,7 +3387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6547620299712791684}
   - component: {fileID: 2841513217785300091}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Hand_L ----- TargetToLookAt
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -3559,13 +3421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc93577eb0eb8b8449b2934a53f84997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Notes: 'This class uses the AimDirection of the Crosshair to move the local position
-    of a gameobject that''s used as a look at target by the non-trigger hand.
-
-    This
-    values are hardcoded in the serialized properties, feel free to mess around with
-    them to get a feeling of what each of them do. To reset the values simply right
-    click on top of the script name and hit Reset.'
   lerpSpeed: 2
   sensitivity: {x: 0.1, y: 1}
   initialOffset: {x: 0.25, y: 0.18}
@@ -3582,7 +3437,7 @@ GameObject:
   - component: {fileID: 8393853271592189921}
   - component: {fileID: 734460445584938205}
   - component: {fileID: 6588173303073056653}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Neck_BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3656,7 +3511,7 @@ SpriteRenderer:
   m_Size: {x: 0.125, y: 0.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6588173303073056653
@@ -3671,14 +3526,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &7652864022884033062
 GameObject:
@@ -3689,7 +3536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5119003599302564708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Charge_PFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3722,6 +3569,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6404026955403111452}
   - component: {fileID: 8444628212960485943}
+  - component: {fileID: 3482437658394922760}
   - component: {fileID: 1792083029440309710}
   - component: {fileID: 5098624267578171636}
   - component: {fileID: 1625477441490228696}
@@ -3732,9 +3580,10 @@ GameObject:
   - component: {fileID: 4548498704574884199}
   - component: {fileID: 3530234498814306488}
   - component: {fileID: 6368288877303031556}
-  m_Layer: 8
+  - component: {fileID: 7432938432442685595}
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player_1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3752,6 +3601,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1575411850343920644}
   - {fileID: 6919071211237621336}
   - {fileID: 8062131517879327160}
   - {fileID: 5243916028185679856}
@@ -3769,8 +3619,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f95f8c120c8ee28459f3d173c2318a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: It handles the player inputs and calls methods from other classes based
-    on those inputs. It also handles movement.
+--- !u!114 &3482437658394922760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904666705418624386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79164f8a3286cd3419aabbbfce84eb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthBarSlider: {fileID: 0}
+  hitFX: {fileID: 0}
+  deathFX: {fileID: 0}
+  invincibleTime: 0.5
+  restartDelay: 1.5
 --- !u!114 &1792083029440309710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3784,8 +3650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getAnimInChild: 1
-  notes: This class has methods for controlling the player's animations. The PlayerController
-    class is the one that calls those methods.
 --- !u!114 &5098624267578171636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3798,7 +3662,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a97e1edfa06abf47a5d5cac1d5d93d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: This class controls the behaviour of the player's body based on MouseInput.vectorFromPlayerToMouseWorldPos
   handRenderers:
   - {fileID: 3216205789184209450}
   headRenderers:
@@ -3817,8 +3680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480aa5b6e040f314dba4e43c670b80a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: To call the method UpdateLookAt() from N amount of LookAt2Dv2 classes at
-    the same time.
   lookAtsToUpdate:
   - {fileID: 879239172255945303}
   - {fileID: 2492308893376152207}
@@ -3836,7 +3697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d8a097d3b75c540bb72f32c62ba46a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: To handle N amount of LookAt2Dv2 classes at the same time.
   lookAts:
   - {fileID: 879239172255945303}
   - {fileID: 2492308893376152207}
@@ -3852,11 +3712,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485bd3e99c6913e45aa866d5b71b4602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: This class is used as a bridge between the player and the weapons, everything
-    that can be done with the base class Weapon should be handled by this class.
   weapons:
   - {fileID: 2257957343862947362}
-  - {fileID: 218666755704336549}
 --- !u!61 &2940987335925976185
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3974,9 +3831,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 384fc866cc7a6144abe95279d4812ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: This class is used to control all the behaviours related to the player's
-    materials.
   bodyMaterial: {fileID: 2100000, guid: 2f4e9ae02ea53e64dafaa049fb5fbe5c, type: 2}
+--- !u!61 &7432938432442685595
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904666705418624386}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.0009894371, y: -0.32356307}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.36413503, y: 1.2498827}
+  m_EdgeRadius: 0.09
 --- !u!1 &8043985049122355462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,7 +3888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6993452392569922744}
   - component: {fileID: 879239172255945303}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head --------------------- LookAt MousePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4023,11 +3924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa390996960a9e4faa0e6cdfabaa2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: New v2. The gameobject that has this component attached will instantly rotate
-    to make its x or y axis look towards the assigned target or towards mouse world
-    position if a exposed enum is selected. The direction can be inverted by checking
-    isFlipAxis. Also there is an option to disable local update if a linked control
-    is needed. It can also use a smooth rotation by enabling isSmoothRotationEnable.
   lookAtTarget: 1
   targetTransform: {fileID: 0}
   axis: 0
@@ -4050,7 +3946,7 @@ GameObject:
   - component: {fileID: 1323289936344722378}
   - component: {fileID: 6296594725036453759}
   - component: {fileID: 5794218887955194333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4117,12 +4013,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
-  m_Sprite: {fileID: 1262169934571257000, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: 8415491124527123855, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.15625, y: 0.09375}
+  m_Size: {x: 0.3125, y: 0.1875}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4140,14 +4036,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1 &8292701626563140568
 GameObject:
@@ -4164,13 +4052,13 @@ GameObject:
   - component: {fileID: 2420704947555820599}
   - component: {fileID: 4142248575275847234}
   - component: {fileID: 1532578535514257229}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LaserRifle_Auto-Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7452979938886649256
 Transform:
   m_ObjectHideFlags: 0
@@ -4278,9 +4166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   _UseRate: 0
-  notes: This is a derived class from the base class Weapon. It has a primary action
-    to shoot projectiles based on a UseRate value and a secondary action with a timer
-    that after reaching its duration will shoot a secondary projectile.
   basicProjectilePrefab: {fileID: 1799498612625121595, guid: 0b59b9306155950418e390d7f9329994, type: 3}
   chargedProjectilePrefab: {fileID: 1799498612625121595, guid: 711af070ba424d1429c60882816125ee, type: 3}
   projectileSpawnPoint: {fileID: 4214910565288844174}
@@ -4299,7 +4184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   getAnimInChild: 0
-  notes: This class has methods to handle the animations of the derived class W_ShootProjectileCanCharge.
 --- !u!114 &4142248575275847234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4312,10 +4196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a205ac62bbb04547bf088cdefc3ffb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: Any gameobject with this class will have an AudioSource and will be able
-    to easily play sounds on start() or link to other classes to quickly play sounds
-    using the provided public variables. Make sure to disable AudioSource Play On
-    Awake.
   sounds:
   - notes: 
     clip: {fileID: 8300000, guid: 0371498ebbd6306488066dfbdda41460, type: 3}
@@ -4432,7 +4312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7198300755757628393}
   - component: {fileID: 3770145374357129095}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: pivot_ForeArm_L --- LookAt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4467,11 +4347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa390996960a9e4faa0e6cdfabaa2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: New v2. The gameobject that has this component attached will instantly rotate
-    to make its x or y axis look towards the assigned target or towards mouse world
-    position if a exposed enum is selected. The direction can be inverted by checking
-    isFlipAxis. Also there is an option to disable local update if a linked control
-    is needed. It can also use a smooth rotation by enabling isSmoothRotationEnable.
   lookAtTarget: 0
   targetTransform: {fileID: 8437700562211729776}
   axis: 1
@@ -4493,7 +4368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4188141379195785780}
   - component: {fileID: 8299374454935955538}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BarrelPiece_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4581,7 +4456,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5183152461698395971}
   - component: {fileID: 5536960293066752411}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BarrelPiece_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4669,7 +4544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8047131014708710032}
   - component: {fileID: 1612024708098975795}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnergyLines_Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4757,7 +4632,7 @@ GameObject:
   - component: {fileID: 7304495359784903147}
   - component: {fileID: 1467270982425454077}
   - component: {fileID: 6000530112098791778}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: UpperArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4824,12 +4699,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: -5986128545762320538, guid: 6a8a497184980dd4080e64d88b08d5c2, type: 3}
+  m_Sprite: {fileID: -173608585, guid: d25b0aae06cd6b8468d38a27c315e757, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.09375, y: 0.125}
+  m_Size: {x: 0.125, y: 0.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -4847,14 +4722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a87f5f6f38bd3439451c3384a31a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: The gameobject with this class attached, and that has a Sprite Renderer,
-    will create a new gameobject with an AfterImageGroup class attached to it and
-    a hardcoded amount of AfterImage classes stored in the group. When the ground
-    is created, it will immediately look for the class AfterImageHandler and add
-    itself to a List that's then used by that class to set Active all the AfterImages
-    stored in each group. I made it like this to avoid the hassle of manually creating
-    a bunch of after images and the pain it could be to change them all if I ever
-    needed to.
   afterImagePrefab: {fileID: 6966699086694962128, guid: 8a404528287d32a4a88cbc22d34e009f, type: 3}
 --- !u!1001 &5441247637367680242
 PrefabInstance:
@@ -5013,4 +4880,78 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5805658982914378135, guid: ddfc27c36f61c80478b57e06195306a5, type: 3}
   m_PrefabInstance: {fileID: 6452246770040598437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8647722071273266052
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6404026955403111452}
+    m_Modifications:
+    - target: {fileID: 2513807518827696983, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_Name
+      value: MASK
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+--- !u!4 &1575411850343920644 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7916798029388902272, guid: 3255b2f0344c51146b6580317343dad0, type: 3}
+  m_PrefabInstance: {fileID: 8647722071273266052}
   m_PrefabAsset: {fileID: 0}

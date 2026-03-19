@@ -5,12 +5,7 @@
 /// </summary>
 public class CrosshairHandler : MonoBehaviour
 {
-    
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
+   
     
 
     [TextArea(3, 10)]

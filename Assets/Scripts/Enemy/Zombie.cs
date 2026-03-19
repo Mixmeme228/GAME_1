@@ -231,7 +231,7 @@ public class ZombieAI : MonoBehaviour
             Instantiate(deathFX, transform.position, Quaternion.identity);
 
         SetState(ZombieState.Dead);
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1f);
     }
 
     /// <summary>Лечение.</summary>
