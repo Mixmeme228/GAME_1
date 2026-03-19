@@ -3,13 +3,7 @@
 public class PlayerPhysics : Physics2DHandler
 {
     
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
     
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
-    
-
     public float MoveSpeed { get { return _MoveSpeed; } private set { _MoveSpeed = value; } }
     [SerializeField] private float _MoveSpeed = 6f;
 
