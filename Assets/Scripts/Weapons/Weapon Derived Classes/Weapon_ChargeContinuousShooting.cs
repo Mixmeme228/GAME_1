@@ -5,12 +5,7 @@
 /// </summary>
 public class Weapon_ChargeContinuousShooting : Weapon
 {
-    
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
+   
     
 
     public GameObject basicProjectilePrefab;

@@ -129,7 +129,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 10
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -203,8 +203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   stopDistance: 0.4
-  activationRadius: 10.8
-  chaseDistance: 15
+  activationRadius: 20
+  chaseDistance: 20
   attackRadius: 2
   attackDamage: 1
   attackCooldown: 0.3

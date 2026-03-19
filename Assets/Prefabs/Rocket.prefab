@@ -111,7 +111,7 @@ MonoBehaviour:
   rocketHP: 2
   destroyVFX: {fileID: 0}
   damage: 20
-  explosionRadius: 0.6
+  explosionRadius: 1
   explosionPrefab: {fileID: 3216808288753355299, guid: 73e348fb3840b2d4aa3f236528241931, type: 3}
   lifetime: 16
 --- !u!50 &3126588393018057518

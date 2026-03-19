@@ -4840,10 +4840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a205ac62bbb04547bf088cdefc3ffb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notes: Any gameobject with this class will have an AudioSource and will be able
-    to easily play sounds on start() or link to other classes to quickly play sounds
-    using the provided public variables. Make sure to disable AudioSource Play On
-    Awake.
   sounds:
   - notes: Laser wall impact
     clip: {fileID: 8300000, guid: f830748fb4ec34d46b23346a26c77004, type: 3}
@@ -4883,7 +4879,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 1c4bd77b55eeab54d8c42b508bd42021, type: 2}
-  - {fileID: 2100000, guid: 1c4bd77b55eeab54d8c42b508bd42021, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4903,7 +4898,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0

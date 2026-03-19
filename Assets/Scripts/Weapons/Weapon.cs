@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 
+
+
 public class Weapon : MonoBehaviour
 {
+    
     #region ---------------------------- PROPERTIES
+
+    /// <summary>
+    /// Option for how to switch use rates using SwitchUseRate.
+    /// </summary>
     public enum SwitchUseRateType { Next, Previous, ByIndex }
 
     [SerializeField] private bool debug = false;
