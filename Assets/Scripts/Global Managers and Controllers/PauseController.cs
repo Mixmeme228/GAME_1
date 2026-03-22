@@ -4,11 +4,7 @@ using UnityEngine.Events;
 public class PauseController : MonoBehaviour
 {
     
-    // ----- 2D Isometric Shooter Study -----
-    // ----------- by Tadadosi --------------
-    
-    // ---- Support my work by following ----
-    // ---- https://twitter.com/tadadosi ----
+   
     
 
     public UnityEvent onGamePause;
@@ -43,7 +39,7 @@ public class PauseController : MonoBehaviour
             onGamePause.Invoke();
     }
 
-    private void OnGameResume()
+    public void OnGameResume()
     {
         Time.timeScale = 1;
 

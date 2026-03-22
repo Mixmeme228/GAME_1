@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
 
     [Header("Damage")]
     [SerializeField] private float _Damage = 10f;
-    public float Damage => _Damage; 
+    public float Damage => _Damage;
 
     [Header("FXs")]
     [SerializeField] private GameObject hitPFX = null;
@@ -54,7 +54,16 @@ public class Projectile : MonoBehaviour
         _Sfx?.PlaySound(0);
         travelDirection = PlayerBodyPartsHandler.isRightDirection ? Vector3.right : -Vector3.right;
         transform.parent = null;
-        Destroy(gameObject, LifeTime);
+        Invoke(nameof(DestroyByLifetime), LifeTime);
+    }
+
+    public void Fire(Vector2 direction)
+    {
+        hasLaunched = true;
+        travelDirection = direction;
+        _Sfx?.PlaySound(0);
+        transform.parent = null;
+        Invoke(nameof(DestroyByLifetime), LifeTime);
     }
 
     // ──────────────────────────────────────────────
@@ -65,21 +74,43 @@ public class Projectile : MonoBehaviour
     }
 
     // ──────────────────────────────────────────────
+    private void DestroyByLifetime()
+    {
+        if (hitPFX != null)
+            Instantiate(hitPFX, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+    // ──────────────────────────────────────────────
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (impactCount > 0) return;
 
-        BossAI boss = collision.GetComponent<BossAI>();
+        // ── BossAI (старый) ───────────────────────────────────────────────
+        BossAI boss = collision.GetComponentInParent<BossAI>();
         if (boss != null)
         {
             impactCount++;
             boss.TakeDamage(_Damage);
-            if (hitPFX != null)
-                Instantiate(hitPFX, collision.ClosestPoint(transform.position), Quaternion.identity);
+            SpawnHitFX(collision);
+            CancelInvoke(nameof(DestroyByLifetime));
             Destroy(gameObject);
             return;
         }
 
+        // ── BossAI2 — обычный снаряд бьёт по телу (не щиту) ──────────────
+        BossAI2 boss2 = collision.GetComponentInParent<BossAI2>();
+        if (boss2 != null)
+        {
+            impactCount++;
+            boss2.TakeDamage(_Damage);  // щит поглощает урон по shieldDamageReduction
+            SpawnHitFX(collision);
+            CancelInvoke(nameof(DestroyByLifetime));
+            Destroy(gameObject);
+            return;
+        }
+
+        // ── Обычные теги ──────────────────────────────────────────────────
         bool shouldHit = collision.CompareTag("Wall")
                       || collision.CompareTag("Enemy")
                       || collision.CompareTag("Player");
@@ -87,24 +118,26 @@ public class Projectile : MonoBehaviour
 
         impactCount++;
 
-        // ── Урон врагам ───────────────────────────────────────────────────
         if (collision.CompareTag("Enemy"))
         {
-            // Робот
-            Robot robot = collision.GetComponent<Robot>();
-            if (robot != null)
-                robot.TakeDamage(_Damage);
+            Robot robot = collision.GetComponentInParent<Robot>();
+            if (robot != null) { robot.TakeDamage(_Damage); }
 
-            // Зомби
-            ZombieAI zombie = collision.GetComponent<ZombieAI>();
-            if (zombie != null)
-                zombie.TakeDamage(_Damage);
+            ZombieAI zombie = collision.GetComponentInParent<ZombieAI>();
+            if (zombie != null) { zombie.TakeDamage(_Damage); }
+
+            AlienAI alien = collision.GetComponentInParent<AlienAI>();
+            if (alien != null) { alien.TakeDamage(_Damage); }
         }
 
-        // ── Эффект попадания ──────────────────────────────────────────────
+        SpawnHitFX(collision);
+        CancelInvoke(nameof(DestroyByLifetime));
+        Destroy(gameObject);
+    }
+
+    private void SpawnHitFX(Collider2D collision)
+    {
         if (hitPFX != null)
             Instantiate(hitPFX, collision.ClosestPoint(transform.position), Quaternion.identity);
-
-        Destroy(gameObject);
     }
 }

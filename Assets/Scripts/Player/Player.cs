@@ -13,7 +13,7 @@ public class Zombie : MonoBehaviour
     public float chaseRange = 5f;   // дистанция обнаружения игрока
     public float attackRange = 0.8f; // дистанция атаки
     public float attackCooldown = 1.2f;
-    public int attackDamage = 1;
+    public float attackDamage = 1;
     public int maxHealth = 3;
 
     [Header("Патруль")]
@@ -28,7 +28,7 @@ public class Zombie : MonoBehaviour
     private Animator _anim;
     private Transform _player;
 
-    private int _health;
+    private float _health;
     private bool _isDead = false;
     private float _attackTimer = 0f;
 
@@ -197,7 +197,7 @@ public class Zombie : MonoBehaviour
     }
 
     // ── Урон / смерть ────────────────────────────────────────
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         if (_isDead) return;
         _health -= dmg;

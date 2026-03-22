@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-
 public class TadaInput : MonoBehaviour
 {
     [TextArea(2, 10)]
@@ -21,10 +20,10 @@ public class TadaInput : MonoBehaviour
     private static Vector3 _MouseWorldPos;
 
     public enum ThisKey
-    { 
+    {
         None, MoveLeft, MoveRight, MoveUp, MoveDown, PrimaryAction, SecondaryAction,
-        PreviousWeapon, NextWeapon, PreviousUseRate, NextUseRate, 
-        MouseAnyMovement, Dash, Pause, Count
+        PreviousWeapon, NextWeapon, PreviousUseRate, NextUseRate,
+        MouseAnyMovement, Dash, Pause, Interact, Count  // ← Interact добавлен, E больше не NextWeapon
     }
     private static ThisKey[] currentKeys;
     private static ThisKey[] currentKeysDown;
@@ -44,7 +43,7 @@ public class TadaInput : MonoBehaviour
     private static Vector2 _AimAxisRawInput;
 
     private bool isScrollWheelActive;
-   
+
     private Camera cam;
 
     private void Awake()
@@ -69,80 +68,58 @@ public class TadaInput : MonoBehaviour
         _MouseWorldPos.z = 0f;
 
         _MoveAxisSmoothInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-
-        // NOTE: I should add this axis clamping to a Utility class.
-        // Clamp axis magnitude to have a value that doesn't go higher than 1 if it's a diagonal vector.
         if (_MoveAxisSmoothInput.magnitude > 1)
-            _MoveAxisSmoothInput *= (100f / _MoveAxisSmoothInput.magnitude)/100f;
+            _MoveAxisSmoothInput *= (100f / _MoveAxisSmoothInput.magnitude) / 100f;
 
         _MoveAxisRawInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
-        // Clamp axis magnitude to have a value that doesn't go higher than 1 if it's a diagonal vector.
         if (_MoveAxisRawInput.magnitude > 1)
             _MoveAxisRawInput *= (100f / _MoveAxisRawInput.magnitude) / 100f;
 
         _AimAxisSmoothInput = new Vector2(Input.GetAxis("HorizontalAim"), Input.GetAxis("VerticalAim"));
-
         if (_AimAxisRawInput.magnitude > 1)
             _AimAxisSmoothInput *= (100f / _AimAxisSmoothInput.magnitude) / 100f;
 
         _AimAxisRawInput = new Vector2(Input.GetAxisRaw("HorizontalAim"), Input.GetAxisRaw("VerticalAim"));
-
-        // Clamp axis magnitude to have a value that doesn't go higher than 1 if it's a diagonal vector.
         if (_AimAxisRawInput.magnitude > 1)
             _AimAxisRawInput *= (100f / _AimAxisRawInput.magnitude) / 100f;
 
+        // ── Hold ──────────────────────────────────────────────────────────
         if (Input.GetKey(KeyCode.A))
             StoreCurrentKey(ThisKey.MoveLeft);
-
         if (Input.GetKey(KeyCode.D))
             StoreCurrentKey(ThisKey.MoveRight);
-
         if (Input.GetKey(KeyCode.W))
             StoreCurrentKey(ThisKey.MoveUp);
-
         if (Input.GetKey(KeyCode.S))
             StoreCurrentKey(ThisKey.MoveDown);
-
         if (Input.GetMouseButton(0))
             StoreCurrentKey(ThisKey.PrimaryAction);
-
         if (Input.GetMouseButton(1))
             StoreCurrentKey(ThisKey.SecondaryAction);
 
+        // ── KeyDown ───────────────────────────────────────────────────────
         if (Input.GetKeyDown(KeyCode.A))
             StoreCurrentKeyDown(ThisKey.MoveLeft);
-
         if (Input.GetKeyDown(KeyCode.D))
             StoreCurrentKeyDown(ThisKey.MoveRight);
-
         if (Input.GetKeyDown(KeyCode.W))
             StoreCurrentKeyDown(ThisKey.MoveUp);
-
         if (Input.GetKeyDown(KeyCode.S))
             StoreCurrentKeyDown(ThisKey.MoveDown);
-
         if (Input.GetKeyDown(KeyCode.Space))
             StoreCurrentKeyDown(ThisKey.Dash);
-
         if (Input.GetKeyDown(KeyCode.C))
             StoreCurrentKeyDown(ThisKey.PreviousUseRate);
-
         if (Input.GetKeyDown(KeyCode.V))
             StoreCurrentKeyDown(ThisKey.NextUseRate);
-
-        if (Input.GetKeyDown(KeyCode.E))
-            StoreCurrentKeyDown(ThisKey.NextWeapon);
-
+        if (Input.GetKeyDown(KeyCode.E))                    // ← только Interact
+            StoreCurrentKeyDown(ThisKey.Interact);
         if (Input.GetKeyDown(KeyCode.Q))
             StoreCurrentKeyDown(ThisKey.PreviousWeapon);
-
         if (Input.GetMouseButtonDown(0))
             StoreCurrentKeyDown(ThisKey.PrimaryAction);
-
         if (Input.GetMouseButtonDown(1))
             StoreCurrentKeyDown(ThisKey.SecondaryAction);
-
         if (Input.GetKeyDown(KeyCode.Escape))
             StoreCurrentKeyDown(ThisKey.Pause);
 
@@ -151,53 +128,38 @@ public class TadaInput : MonoBehaviour
             isScrollWheelActive = true;
             StoreCurrentKeyDown(ThisKey.NextWeapon);
         }
-
         if (Input.mouseScrollDelta.y < 0)
         {
             isScrollWheelActive = true;
             StoreCurrentKeyDown(ThisKey.PreviousWeapon);
         }
 
+        // ── KeyUp ─────────────────────────────────────────────────────────
         if (Input.GetKeyUp(KeyCode.A))
             StoreCurrentKeyUp(ThisKey.MoveLeft);
-
         if (Input.GetKeyUp(KeyCode.D))
             StoreCurrentKeyUp(ThisKey.MoveRight);
-
         if (Input.GetKeyUp(KeyCode.W))
             StoreCurrentKeyUp(ThisKey.MoveUp);
-
         if (Input.GetKeyUp(KeyCode.S))
             StoreCurrentKeyUp(ThisKey.MoveDown);
-
         if (Input.GetKeyUp(KeyCode.Space))
             StoreCurrentKeyUp(ThisKey.Dash);
-
         if (Input.GetKeyUp(KeyCode.C))
             StoreCurrentKeyUp(ThisKey.PreviousUseRate);
-
         if (Input.GetKeyUp(KeyCode.V))
             StoreCurrentKeyUp(ThisKey.NextUseRate);
-
-        if (Input.GetKeyUp(KeyCode.V))
-            StoreCurrentKeyUp(ThisKey.NextUseRate);
-
-        if (Input.GetKeyUp(KeyCode.E))
-            StoreCurrentKeyUp(ThisKey.NextWeapon);
-
+        if (Input.GetKeyUp(KeyCode.E))                      // ← только Interact
+            StoreCurrentKeyUp(ThisKey.Interact);
         if (Input.GetKeyUp(KeyCode.Q))
             StoreCurrentKeyUp(ThisKey.PreviousWeapon);
-
         if (Input.GetMouseButtonUp(0))
             StoreCurrentKeyUp(ThisKey.PrimaryAction);
-
         if (Input.GetMouseButtonUp(1))
             StoreCurrentKeyUp(ThisKey.SecondaryAction);
-
         if (Input.GetKeyUp(KeyCode.Escape))
             StoreCurrentKeyUp(ThisKey.Pause);
 
-        // TODO: Improve mouseScrollDelta input conditions.
         if (Input.mouseScrollDelta.y == 0 && isScrollWheelActive)
         {
             StoreCurrentKeyUp(ThisKey.NextWeapon);
@@ -209,11 +171,9 @@ public class TadaInput : MonoBehaviour
     public static bool GetKey(ThisKey key)
     {
         int index = (int)key;
-
         if (currentKeys[index] == key)
         {
-            if (debug)
-                Debug.Log("Key: " + key.ToString());
+            if (debug) Debug.Log("Key: " + key.ToString());
             return true;
         }
         return false;
@@ -225,8 +185,7 @@ public class TadaInput : MonoBehaviour
         if (currentKeysDown[index] == key)
         {
             currentKeysDown[index] = ThisKey.None;
-            if (debug)
-                Debug.Log("KeyDown: " + key.ToString());
+            if (debug) Debug.Log("KeyDown: " + key.ToString());
             return true;
         }
         return false;
@@ -238,8 +197,7 @@ public class TadaInput : MonoBehaviour
         if (currentKeysUp[index] == key)
         {
             currentKeysUp[index] = ThisKey.None;
-            if (debug)
-                Debug.Log("KeyUp: " + key.ToString());
+            if (debug) Debug.Log("KeyUp: " + key.ToString());
             return true;
         }
         return false;
@@ -282,16 +240,16 @@ public class TadaInput : MonoBehaviour
     private static void StoreCurrentAxisAsKeyType(ThisKey key, float rawAxisValue)
     {
         int index = (int)key;
-        if (rawAxisValue > 0) 
+        if (rawAxisValue > 0)
         {
-            if (!currentAxisDown[index]) // DOWN
+            if (!currentAxisDown[index])
             {
                 currentAxisDown[index] = true;
                 StoreCurrentKeyDown(key);
             }
-            StoreCurrentKey(key); // HOLD
+            StoreCurrentKey(key);
         }
-        if (rawAxisValue == 0 && currentAxisDown[index]) // UP
+        if (rawAxisValue == 0 && currentAxisDown[index])
         {
             currentAxisDown[index] = false;
             StoreCurrentKeyUp(key);

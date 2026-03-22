@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 319627374080751299}
   - component: {fileID: 32814571535754807}
   - component: {fileID: 5554063828744146963}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Zombie
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852473054456473759}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -205,10 +205,10 @@ MonoBehaviour:
   stopDistance: 0.4
   activationRadius: 20
   chaseDistance: 20
-  attackRadius: 2
-  attackDamage: 1
+  attackRadius: 1
+  attackDamage: 10
   attackCooldown: 0.3
-  maxHealth: 125
+  maxHealth: 100
   healthBarSlider: {fileID: 0}
   hitFX: {fileID: 0}
   deathFX: {fileID: 0}
@@ -283,6 +283,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3611432885161638092}
     m_Modifications:
+    - target: {fileID: 5448171330311141107, guid: 0f672c8c6bb31e54ea4045ecd41563f1, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8675665505461965776, guid: 0f672c8c6bb31e54ea4045ecd41563f1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.09
@@ -326,6 +330,10 @@ PrefabInstance:
     - target: {fileID: 8914544580663859540, guid: 0f672c8c6bb31e54ea4045ecd41563f1, type: 3}
       propertyPath: m_Name
       value: HP
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914544580663859540, guid: 0f672c8c6bb31e54ea4045ecd41563f1, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9142015627133464271, guid: 0f672c8c6bb31e54ea4045ecd41563f1, type: 3}
       propertyPath: zombie

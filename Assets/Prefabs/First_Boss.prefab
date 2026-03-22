@@ -131,7 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiEnabled: 1
   currentState: 0
-  maxHealth: 500
+  maxHealth: 800
   detectionRange: 15
   phase2Threshold: 0.5
   bulletPrefab: {fileID: 1799498612625121595, guid: d942ff5aa93bc5f41a3dba8743b91883, type: 3}

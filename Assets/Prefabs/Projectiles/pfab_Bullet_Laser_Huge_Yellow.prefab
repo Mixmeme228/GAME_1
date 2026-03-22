@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Speed: 30
   _LifeTime: 1
-  _Damage: 100
+  _Damage: 60
   hitPFX: {fileID: 5089116883865689445, guid: 14a727ad5b1b61044988ebbf6f081adc, type: 3}
 --- !u!114 &5364024512209706106
 MonoBehaviour:
