@@ -297,6 +297,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5243916028185679856}
   - {fileID: 2912217173899075237}
   - {fileID: 7389686920640424320}
   m_Father: {fileID: 6404026955403111452}
@@ -854,7 +855,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6404026955403111452}
+  m_Father: {fileID: 8062131517879327160}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1256230430444752522
 SpriteRenderer:
@@ -3604,7 +3605,6 @@ Transform:
   - {fileID: 1575411850343920644}
   - {fileID: 6919071211237621336}
   - {fileID: 8062131517879327160}
-  - {fileID: 5243916028185679856}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8444628212960485943
@@ -3635,8 +3635,10 @@ MonoBehaviour:
   healthBarSlider: {fileID: 0}
   hitFX: {fileID: 0}
   deathFX: {fileID: 0}
+  objectToDestroyOnDeath: {fileID: 0}
   invincibleTime: 0.5
   restartDelay: 1.5
+  keyCountText: {fileID: 0}
 --- !u!114 &1792083029440309710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3818,6 +3820,8 @@ MonoBehaviour:
   - {fileID: 7233831223373413498}
   - {fileID: 5584544859017164401}
   dashForce: 20
+  dashCooldown: 1
+  dashInvincibleTime: 0.3
   dashSFXHandler: {fileID: 1186635850230026864}
 --- !u!114 &6368288877303031556
 MonoBehaviour:
