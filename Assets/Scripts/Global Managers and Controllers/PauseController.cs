@@ -43,9 +43,9 @@ public class PauseController : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        // Resume audio
+       
         AudioListener.pause = false;
-
+        isGamePaused = false;
         // If there is at least one event added in the Inspector tab, Invoke it.
         if (onGameResume != null)
             onGameResume.Invoke();
